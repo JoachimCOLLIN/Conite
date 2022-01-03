@@ -7,23 +7,23 @@ import {Router} from "@angular/router";
     selector: 'login-form',
     template: `
 <mat-card>
-<h2>Login</h2>
+<h2>Connexion</h2>
 <mat-form-field class="full-width">
 <input matInput
-placeholder="login"
+placeholder="Identifiant"
 (keyup)="updateLogin($event)">
 </mat-form-field>
 
 <mat-form-field class="full-width">
 <input type="password" matInput
-placeholder="password"
+placeholder="Mot de passe"
 (keyup)="updatePassword($event)">
 </mat-form-field>
 
 <button mat-raised-button
 color="primary"
 (click)="login()">
-Sign In
+Se connecter
 </button>
 </mat-card>
 `,

@@ -3,6 +3,9 @@ export class Exam
     constructor(
         public title: string,
         public description: string,
+        public localisation: string,
+        public moderateurs: string,
+        public datedelancement: string,
         public _id?: number,
         public updatedAt?: Date,
         public createdAt?: Date,

@@ -7,14 +7,17 @@ from . import auth
 from . import db
 from . import exams
 from .entities.base import Base
+from .auth import AuthError, requires_auth
+
+
 
 
 def create_app(test_config=None):
-    # creating the Flask application
+    # creating the Flask application | config = tous les détails du fonctionnement de l'application
     app = flask.Flask(__name__, instance_relative_config=True)
     flask_cors.CORS(app)
 
-    # load configuration from config.py
+    # load configuration d'un fichier externe config.py
     app.config.from_object('config')
 
     if test_config is None:
@@ -34,6 +37,7 @@ def create_app(test_config=None):
     with app.app_context():
         Base.metadata.create_all(db.get_engine())
 
+    #regroupement de fonctions factoriser notre code
     app.register_blueprint(auth.blueprint)
     app.register_blueprint(exams.blueprint)
 

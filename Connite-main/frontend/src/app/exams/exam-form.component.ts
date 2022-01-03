@@ -7,10 +7,10 @@ import {Router} from "@angular/router";
   selector: 'exam-form',
   template: `
     <mat-card>
-      <h2>New Exam</h2>
+      <h2>Nouveau Chantier</h2>
         <mat-form-field class="full-width">
           <input matInput
-                 placeholder="Title"
+                 placeholder="Titre"
                  (keyup)="updateTitle($event)">
         </mat-form-field>
 
@@ -20,10 +20,29 @@ import {Router} from "@angular/router";
                  (keyup)="updateDescription($event)">
         </mat-form-field>
 
+        <mat-form-field class="full-width">
+          <input matInput
+                 placeholder="Localisation"
+                 (keyup)="updateLocalisation($event)">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput
+                placeholder="Date de lancement"
+                (keyup)="updateDateDeLancement($event)">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput
+                placeholder="Moderateurs"
+                (keyup)="updateModerateurs($event)">
+        </mat-form-field>
+
+
         <button mat-raised-button
                 color="primary"
                 (click)="saveExam()">
-          Save Exam
+          Enregistrer Chantier
         </button>
     </mat-card>
   `,
@@ -45,6 +64,9 @@ export class ExamFormComponent {
     exam = {
         title: '',
         description: '',
+        localisation: '',
+        moderateurs: '',
+        datedelancement: '',
     };
 
     constructor(private examsApi: ExamsApiService, private router: Router)
@@ -58,6 +80,21 @@ export class ExamFormComponent {
     updateDescription(event: any)
     {
         this.exam.description = event.target.value;
+    }
+
+    updateLocalisation(event: any)
+    {
+        this.exam.localisation = event.target.value;
+    }
+
+    updateDateDeLancement(event: any)
+    {
+        this.exam.datedelancement = event.target.value;
+    }
+
+    updateModerateurs(event: any)
+    {
+        this.exam.moderateurs = event.target.value;
     }
 
     saveExam()

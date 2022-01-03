@@ -4,7 +4,6 @@ from .auth import requires_auth
 from .db import get_session
 from .entities.exam import Exam, ExamSchema
 
-
 blueprint = flask.Blueprint('exams', __name__)
 
 
@@ -28,7 +27,7 @@ def get_exams():
 def add_exam():
     # mount exam object
     posted_exam = ExamSchema(
-        only=('title', 'description')).load(flask.request.get_json())
+        only=('title', 'description','localisation','datedelancement','moderateurs')).load(flask.request.get_json())
 
     exam = Exam(**posted_exam, created_by="HTTP post request")
 

@@ -2,24 +2,19 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {Exam} from './exam.model';
 import {ExamsApiService} from './exams-api.service';
+import * as Auth0 from 'auth0-web';
 
 
 @Component({
   selector: 'exams',
   template: `
-    <h2>Exams</h2>
-    <p>Choose an exam and start studying.</p>
+    <h2>Mes Chantiers</h2>
     <div class="exams">
       <mat-card class="example-card" *ngFor="let exam of examsList" class="mat-elevation-z5">
         <mat-card-content>
           <mat-card-title>{{exam.title}}</mat-card-title>
           <mat-card-subtitle>{{exam.description}}</mat-card-subtitle>
-          <p>
-            Etiam enim purus, vehicula nec dapibus quis, egestas eu quam.
-            Nullam eleifend auctor leo, vitae rhoncus mi sodales vel.
-            Aenean fermentum laoreet volutpat. Integer quam orci,
-            molestie non nibh suscipit, faucibus euismod sapien.
-          </p>
+          <p></p>
           <button mat-raised-button color="accent">Start Exam</button>
           <button mat-button color="warn" *ngIf="isAdmin()" (click)="delete(exam.id)">Delete</button>
         </mat-card-content>
@@ -41,6 +36,10 @@ export class ExamsComponent implements OnInit, OnDestroy
 
     constructor(private examsApi: ExamsApiService)
     {}
+
+    signIn = Auth0.signIn;
+    signOut = Auth0.signOut;
+    getProfile = Auth0.getProfile;
 
     ngOnInit()
     {
