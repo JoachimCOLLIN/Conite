@@ -20,7 +20,7 @@ import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
 import * as Auth0 from 'auth0-web';
-import { InformationsComponent } from './exams/infos/informations.component';
+import { InformationsComponent } from './exams/informations.component';
 
 
 const appRoutes: Routes = [

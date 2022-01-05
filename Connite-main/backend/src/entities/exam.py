@@ -23,7 +23,7 @@ class Exam(Entity, Base):
         self.moderateurs = moderateurs
 
 
-class ExamSchema(marshmallow.Schema):
+class ExamSchema(marshmallow.Schema): 
     id = marshmallow.fields.Number()
     title = marshmallow.fields.Str()
     description = marshmallow.fields.Str()
