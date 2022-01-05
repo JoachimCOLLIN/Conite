@@ -15,3 +15,15 @@ button.new-exam {
     grid-template-columns: 1fr;
   }
 }
+
+button.new-exam {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+
+button.material-icons{
+  position : absolute;
+  right : 3px;
+  top : 3px;
+}

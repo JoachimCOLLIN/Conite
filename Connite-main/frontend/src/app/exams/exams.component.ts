@@ -12,21 +12,22 @@ import * as Auth0 from 'auth0-web';
     <div class="exams">
       <mat-card class="example-card" *ngFor="let exam of examsList" class="mat-elevation-z5">
         <mat-card-content>
-          <button mat-button  class="material-icons" >
+          <button mat-button  class="material-icons" [routerLink] = "['chantier',exam.id]">
             <mat-icon  >view_headline</mat-icon>
           </button>
           <mat-card-title>{{exam.title}}</mat-card-title>
           <mat-card-subtitle>{{exam.description}}</mat-card-subtitle>
           <p></p>
-          <button mat-raised-button color="accent">Start Exam</button>
-          <button mat-button color="warn" *ngIf="isAdmin()" (click)="delete(exam.id)">Delete</button>
-        </mat-card-content>
+          <button mat-raised-button color="accent">Accès</button>
+          <button mat-button color="warn" *ngIf="isAdmin()" (click)="delete(exam.id)">Supprimer</button>
+          </mat-card-content>
       </mat-card>
     </div>
     <button mat-fab color="primary" *ngIf="!authenticated"
             class="new-exam" routerLink="/new-exam">
       <i class="material-icons">note_add</i>
     </button>
+    
   `,
   styleUrls: ['exams.component.css'],
 })

@@ -3,6 +3,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon'
 
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -19,6 +20,8 @@ import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
 import * as Auth0 from 'auth0-web';
+import { InformationsComponent } from './exams/infos/informations.component';
+
 
 const appRoutes: Routes = [
     {path: '', component: ExamsComponent},
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'new-exam', component: ExamFormComponent},
     {path: 'about', component: AboutComponent},
-    { path: 'callback', component: CallbackComponent },
+    {path: 'callback', component: CallbackComponent },
+    {path: 'chantier/:id', component: InformationsComponent},
 ];
 
 
@@ -39,16 +43,18 @@ const appRoutes: Routes = [
       LoginComponent,
       RegisterComponent,
       CallbackComponent,
+      InformationsComponent,
   ],
   imports: [
       BrowserModule,
       HttpClientModule,
-      RouterModule.forRoot(appRoutes,),
+      RouterModule.forRoot(appRoutes, {enableTracing: true}),
       NoopAnimationsModule,
       MatToolbarModule,
       MatButtonModule,
       MatCardModule,
       MatInputModule,
+      MatIconModule,
   ],
     providers: [
         ExamsApiService,

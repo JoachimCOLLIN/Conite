@@ -6,7 +6,7 @@ export class Exam
         public localisation: string,
         public moderateurs: string,
         public datedelancement: string,
-        public _id?: number,
+        public id?: number,
         public updatedAt?: Date,
         public createdAt?: Date,
         public lastUpdatedBy?: string,

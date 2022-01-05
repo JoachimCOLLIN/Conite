@@ -27,9 +27,9 @@ To deploy the website locally, launch flask in a first terminal:
 
     conda activate angularflask
     FLASK_APP=./backend/src/main.py WEBAPP_DB=./db.sql flask run -h 0.0.0.0
-    $WEBAPP_DB= './db.sql flask run -h 0.0.0.0'
+    $WEBAPP_DB= './db.sql' flask run -h 0.0.0.0
     $env:FLASK_APP= './backend/src/main.py'
-
+    flask run -h 0.0.0.0
 In another terminal run the Angular server:
 
     conda activate angularflask
