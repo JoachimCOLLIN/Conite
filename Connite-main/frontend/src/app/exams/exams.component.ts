@@ -12,6 +12,9 @@ import * as Auth0 from 'auth0-web';
     <div class="exams">
       <mat-card class="example-card" *ngFor="let exam of examsList" class="mat-elevation-z5">
         <mat-card-content>
+          <button mat-button  class="material-icons" >
+            <mat-icon  >view_headline</mat-icon>
+          </button>
           <mat-card-title>{{exam.title}}</mat-card-title>
           <mat-card-subtitle>{{exam.description}}</mat-card-subtitle>
           <p></p>
