@@ -25,6 +25,13 @@ export class ExamsApiService
             .pipe(catchError(ExamsApiService.handleError));
     }
 
+  getExam(id: number) : Observable<Exam>
+  {
+    return this.http
+      .get<Exam>(`${API_URL}/exam/${id}`)
+      .pipe(catchError(ExamsApiService.handleError));
+  }
+
     saveExam(exam: Exam): Observable<any> {
         const httpOptions = {
           headers: new HttpHeaders({
