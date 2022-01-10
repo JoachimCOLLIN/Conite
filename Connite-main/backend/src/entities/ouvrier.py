@@ -10,7 +10,7 @@ class Ouvrier(Entity, Base):
     id_chantier  = sqlalchemy.Column(sqlalchemy.String)
     nom = sqlalchemy.Column(sqlalchemy.String)
     prenom = sqlalchemy.Column(sqlalchemy.String)
-    age = sqlalchemy.Column(sqlalchemy.Number)
+    age = sqlalchemy.Column(sqlalchemy.String)
     qualification = sqlalchemy.Column(sqlalchemy.String)
     
 

@@ -13,27 +13,27 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {AboutComponent} from './about.component';
-import {ExamsApiService} from './exams/exams-api.service';
-import {OuvriersApiService} from './exams/ouvriers-api.service';
-import {InformationsApiService} from './exams/informations-api.service';
-import {ExamFormComponent} from './exams/exam-form.component';
-import {ExamsComponent} from './exams/exams.component';
+import {ChantiersApiService} from './chantiers/chantiers-api.service';
+import {OuvriersApiService} from './chantiers/ouvriers-api.service';
+import {InformationsApiService} from './chantiers/informations-api.service';
+import {ChantierFormComponent} from './chantiers/chantier-form.component';
+import {ChantiersComponent} from './chantiers/chantiers.component';
 import {AuthApiService} from './auth/auth-api.service';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
 import * as Auth0 from 'auth0-web';
-import { InformationsComponent } from './exams/informations.component';
-import { ChantierComponent } from './exams/chantier.component';
-import {ListeOuvrierComponent} from './exams/listeouvrier.component';
-import { OuvrierFormComponent } from './exams/ouvrier-form.component';
+import { InformationsComponent } from './chantiers/informations.component';
+import { ChantierComponent } from './chantiers/chantier.component';
+import {ListeOuvrierComponent} from './chantiers/listeouvrier.component';
+import { OuvrierFormComponent } from './chantiers/ouvrier-form.component';
 
 
 const appRoutes: Routes = [
-    {path: '', component: ExamsComponent},
+    {path: '', component: ChantiersComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'new-exam', component: ExamFormComponent},
+    {path: 'new-chantier', component: ChantierFormComponent},
     {path: 'about', component: AboutComponent},
     {path: 'callback', component: CallbackComponent },
     {path: 'infos/:id', component: InformationsComponent},
@@ -46,8 +46,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
       AppComponent,
-      ExamFormComponent,
-      ExamsComponent,
+      ChantierFormComponent,
+      ChantiersComponent,
       AboutComponent,
       LoginComponent,
       RegisterComponent,
@@ -70,7 +70,7 @@ const appRoutes: Routes = [
       MatTableModule
   ],
     providers: [
-        ExamsApiService,
+        ChantiersApiService,
         AuthApiService,
         OuvriersApiService,
     ],

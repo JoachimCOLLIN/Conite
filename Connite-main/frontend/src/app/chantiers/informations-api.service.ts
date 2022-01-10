@@ -3,11 +3,13 @@ import {HttpClient, HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
-import {Exam} from './exam.model';
+import {Chantier} from './chantier.model';
 import * as Auth0 from 'auth0-web';
+import { strictEqual } from 'assert';
+import { stringify } from 'querystring';
 
 @Injectable()
-export class ExamsApiService
+export class InformationsApiService
 {
     constructor(private http: HttpClient)
     {}
@@ -18,37 +20,27 @@ export class ExamsApiService
     }
 
     // GET list of public, future events
-    getExams()
+    getChantiers(id : number)
     {
         return this.http
-            .get<Exam[]>(`${API_URL}/exams`)
-            .pipe(catchError(ExamsApiService.handleError));
+            .get<Chantier[]>(`${API_URL}/chantiers/${id}`)
+            .pipe(catchError(InformationsApiService.handleError));
     }
 
-    saveExam(exam: Exam): Observable<any> {
+    saveChantier(chantier: Chantier): Observable<any> {
         const httpOptions = {
           headers: new HttpHeaders({
             'Authorization': `Bearer ${Auth0.getAccessToken()}`
           })
         };
         return this.http
-          .post(`${API_URL}/exams`, exam, httpOptions);
+          .post(`${API_URL}/chantiers`, chantier, httpOptions);
     }
-
-    saveExamId(exam: Exam, id : number): Observable<any> {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': `Bearer ${Auth0.getAccessToken()}`
-        })
-      };
-      return this.http
-        .post(`${API_URL}/exams/${id}`, exam, httpOptions);
-  }
     
 
-    deleteExam(examId: number)
+    deleteChantier(chantierId: number)
     {
-        return this.http.delete(`${API_URL}/exams/${examId}`);
+        return this.http.delete(`${API_URL}/chantiers/${chantierId}`);
     }
 
 

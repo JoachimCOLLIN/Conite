@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
-import {Exam} from './exam.model';
-import {ExamsApiService} from './exams-api.service';
+import {Chantier} from './chantier.model';
+import {ChantiersApiService} from './chantiers-api.service';
 import { Ouvrier } from './ouvrier.model';
 import { OuvriersApiService } from './ouvriers-api.service';
 
@@ -49,7 +49,7 @@ import { OuvriersApiService } from './ouvriers-api.service';
    </table>
 
    <button mat-fab color="primary" 
-   class="new-exam" [routerLink] = "['/new-ouvrier',id]">
+   class="new-chantier" [routerLink] = "['/new-ouvrier',id]">
 <i class="material-icons">note_add</i>
 </button>
   
@@ -61,7 +61,7 @@ import { OuvriersApiService } from './ouvriers-api.service';
       width: 100%;
     }
 
-    button.new-exam {
+    button.new-chantier {
       position: fixed;
       bottom: 15px;
       right: 15px;

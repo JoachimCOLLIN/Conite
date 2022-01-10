@@ -5,9 +5,9 @@ from .entity import Entity
 from .base import Base
 
 
-class Exam(Entity, Base):
-    #this class defines that instances of it must be persisted to and retrieved from a table called exams.
-    __tablename__ = 'exams'
+class Chantier(Entity, Base):
+    #this class defines that instances of it must be persisted to and retrieved from a table called chantiers.
+    __tablename__ = 'chantiers'
     title = sqlalchemy.Column(sqlalchemy.String) 
     description = sqlalchemy.Column(sqlalchemy.String)
     localisation = sqlalchemy.Column(sqlalchemy.String)
@@ -23,7 +23,7 @@ class Exam(Entity, Base):
         self.moderateurs = moderateurs
 
 
-class ExamSchema(marshmallow.Schema): 
+class ChantierSchema(marshmallow.Schema): 
     id = marshmallow.fields.Number()
     title = marshmallow.fields.Str()
     description = marshmallow.fields.Str()

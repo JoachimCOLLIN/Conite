@@ -1,4 +1,4 @@
-export class Exam
+export class Chantier
 {
     constructor(
         public title: string,

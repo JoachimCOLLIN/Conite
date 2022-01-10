@@ -3,8 +3,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from './env';
-import {ExamsApiService} from './exams/exams-api.service';
-import {Exam} from './exams/exam.model';
+import {ChantiersApiService} from './chantiers/chantiers-api.service';
+import {Chantier} from './chantiers/chantier.model';
 import {Subscription} from 'rxjs/Subscription';
 import {MatFormFieldModule} from '@angular/material/form-field';
 

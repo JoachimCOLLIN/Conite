@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {ExamsApiService} from "./exams-api.service";
+import {ChantiersApiService} from "./chantiers-api.service";
 import {Router} from "@angular/router";
 
 
 @Component({
-  selector: 'exam-form',
+  selector: 'chantier-form',
   template: `
     <mat-card>
       <h2>Nouveau Chantier</h2>
@@ -41,13 +41,13 @@ import {Router} from "@angular/router";
 
         <button mat-raised-button
                 color="primary"
-                (click)="saveExam()">
+                (click)="saveChantier()">
           Enregistrer Chantier
         </button>
     </mat-card>
   `,
   styles: [`
-    .exams-form {
+    .chantiers-form {
       min-width: 150px;
       max-width: 500px;
       width: 100%;
@@ -60,8 +60,8 @@ import {Router} from "@angular/router";
 })
 
 
-export class ExamFormComponent {
-    exam = {
+export class ChantierFormComponent {
+    chantier = {
         title: '',
         description: '',
         localisation: '',
@@ -69,38 +69,38 @@ export class ExamFormComponent {
         datedelancement: '',
     };
 
-    constructor(private examsApi: ExamsApiService, private router: Router)
+    constructor(private chantiersApi: ChantiersApiService, private router: Router)
     {}
 
     updateTitle(event: any)
     {
-        this.exam.title = event.target.value;
+        this.chantier.title = event.target.value;
     }
 
     updateDescription(event: any)
     {
-        this.exam.description = event.target.value;
+        this.chantier.description = event.target.value;
     }
 
     updateLocalisation(event: any)
     {
-        this.exam.localisation = event.target.value;
+        this.chantier.localisation = event.target.value;
     }
 
     updateDateDeLancement(event: any)
     {
-        this.exam.datedelancement = event.target.value;
+        this.chantier.datedelancement = event.target.value;
     }
 
     updateModerateurs(event: any)
     {
-        this.exam.moderateurs = event.target.value;
+        this.chantier.moderateurs = event.target.value;
     }
 
-    saveExam()
+    saveChantier()
     {
-        this.examsApi
-            .saveExam(this.exam)
+        this.chantiersApi
+            .saveChantier(this.chantier)
             .subscribe(
                 () => this.router.navigate(['/']),
                 error => alert(error.message)

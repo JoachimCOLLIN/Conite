@@ -43,7 +43,7 @@ import { Subscription } from 'rxjs';
     </mat-card>
   `,
   styles: [`
-    .exams-form {
+    .chantiers-form {
       min-width: 150px;
       max-width: 500px;
       width: 100%;
