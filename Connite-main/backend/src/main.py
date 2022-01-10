@@ -8,6 +8,7 @@ from . import db
 from . import exams
 from .entities.base import Base
 from .auth import AuthError, requires_auth
+from . import ouvriers
 
 
 
@@ -40,5 +41,6 @@ def create_app(test_config=None):
     #regroupement de fonctions factoriser notre code
     app.register_blueprint(auth.blueprint)
     app.register_blueprint(exams.blueprint)
+    app.register_blueprint(ouvriers.blueprint)
 
     return app

@@ -3,7 +3,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -13,6 +14,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {AboutComponent} from './about.component';
 import {ExamsApiService} from './exams/exams-api.service';
+import {OuvriersApiService} from './exams/ouvriers-api.service';
+import {InformationsApiService} from './exams/informations-api.service';
 import {ExamFormComponent} from './exams/exam-form.component';
 import {ExamsComponent} from './exams/exams.component';
 import {AuthApiService} from './auth/auth-api.service';
@@ -21,6 +24,9 @@ import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
 import * as Auth0 from 'auth0-web';
 import { InformationsComponent } from './exams/informations.component';
+import { ChantierComponent } from './exams/chantier.component';
+import {ListeOuvrierComponent} from './exams/listeouvrier.component';
+import { OuvrierFormComponent } from './exams/ouvrier-form.component';
 
 
 const appRoutes: Routes = [
@@ -30,7 +36,10 @@ const appRoutes: Routes = [
     {path: 'new-exam', component: ExamFormComponent},
     {path: 'about', component: AboutComponent},
     {path: 'callback', component: CallbackComponent },
-    {path: 'chantier/:id', component: InformationsComponent},
+    {path: 'infos/:id', component: InformationsComponent},
+    {path: 'chantier/:id',component : ChantierComponent},
+    {path: 'listedesouvriers/:id', component: ListeOuvrierComponent},
+    {path: 'new-ouvrier/:id', component : OuvrierFormComponent}
 ];
 
 
@@ -44,6 +53,9 @@ const appRoutes: Routes = [
       RegisterComponent,
       CallbackComponent,
       InformationsComponent,
+      ChantierComponent,
+      ListeOuvrierComponent,
+      OuvrierFormComponent,
   ],
   imports: [
       BrowserModule,
@@ -55,10 +67,12 @@ const appRoutes: Routes = [
       MatCardModule,
       MatInputModule,
       MatIconModule,
+      MatTableModule
   ],
     providers: [
         ExamsApiService,
-        AuthApiService
+        AuthApiService,
+        OuvriersApiService,
     ],
     bootstrap: [AppComponent]
 })
