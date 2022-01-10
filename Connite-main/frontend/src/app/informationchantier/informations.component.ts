@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
 import {InformationsApiService} from './informations-api.service';
-import {Chantier} from './chantier.model';
-import {ChantiersApiService} from './chantiers-api.service';
+import {Chantier} from '../chantiers/chantier.model';
+import {ChantiersApiService} from '../chantiers/chantiers-api.service';
 @Component({
     selector: 'infos',
     template: `

@@ -4,8 +4,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Chantier} from './chantier.model';
 import {ChantiersApiService} from './chantiers-api.service';
-import { Ouvrier } from './ouvrier.model';
-import { OuvriersApiService } from './ouvriers-api.service';
+import { Ouvrier } from '../ouvriers/ouvrier.model';
+import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
 
 
 

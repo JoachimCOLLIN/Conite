@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
-import {Chantier} from './chantier.model';
+import {Chantier} from '../chantiers/chantier.model';
 import * as Auth0 from 'auth0-web';
 import { strictEqual } from 'assert';
 import { stringify } from 'querystring';
