@@ -7,7 +7,7 @@ from . import auth
 from . import db
 from . import chantiers
 from .entities.base import Base
-from .auth import AuthError, requires_auth
+
 from . import ouvriers
 
 

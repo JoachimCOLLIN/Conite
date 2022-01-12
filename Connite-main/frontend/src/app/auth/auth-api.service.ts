@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import { throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
-import {Auth} from './auth.model';
+import {Auth,User} from './auth.model';
 
 @Injectable()
 export class AuthApiService
@@ -17,19 +17,19 @@ export class AuthApiService
         return throwError(err.message || 'Error: Unable to complete request.');
     }
 
-    login(auth: Auth): Observable<any>
+    login(auth: User): Observable<any>
     {
         return this.http
-            .post(`${API_URL}/login`, auth)
-            .pipe(catchError(AuthApiService.handleError));
+            .post(`${API_URL}/login`, auth);
     }
 
     register(auth: Auth): Observable<any>
     {
         return this.http
-            .post(`${API_URL}/register`, auth)
-            .pipe(catchError(AuthApiService.handleError));
+            .post(`${API_URL}/register`, auth);
     }
+
+
 
 
 }

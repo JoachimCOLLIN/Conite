@@ -28,7 +28,6 @@ import { ChantierComponent } from './chantiers/chantier.component';
 import {ListeOuvrierComponent} from './chantiers/listeouvrier.component';
 import { OuvrierFormComponent } from './ouvriers/ouvrier-form.component';
 
-
 const appRoutes: Routes = [
     {path: '', component: ChantiersComponent},
     {path: 'register', component: RegisterComponent},

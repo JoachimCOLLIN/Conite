@@ -7,23 +7,41 @@ import {Router} from "@angular/router";
     selector: 'register-form',
     template: `
 <mat-card>
-<h2>Registration</h2>
+<h2>Inscription</h2>
 <mat-form-field class="full-width">
 <input matInput
-placeholder="Identifiant"
-(keyup)="updateLogin($event)">
+placeholder="Adresse Email"
+(keyup)="updateEmail($event)">
+</mat-form-field>
+
+<mat-form-field class="full-width">
+<input matInput
+placeholder="Prénom"
+(keyup)="updateFirst_name($event)">
+</mat-form-field>
+
+<mat-form-field class="full-width">
+<input matInput
+placeholder="Nom"
+(keyup)="updateFamily_name($event)">
 </mat-form-field>
 
 <mat-form-field class="full-width">
 <input matInput
 placeholder="Mot de passe"
-(keyup)="updatePassword($event)">
+(keyup)="updatePassword1($event)">
+</mat-form-field>
+
+<mat-form-field class="full-width">
+<input matInput
+placeholder="Confirmer Mot de Passe"
+(keyup)="updatePassword2($event)">
 </mat-form-field>
 
 <button mat-raised-button
 color="primary"
 (click)="register()">
-S'enregistrer
+Inscription
 </button>
 </mat-card>
 `,
@@ -43,22 +61,38 @@ width: 100%;
 
 export class RegisterComponent {
     authentication = {
-        login: '',
-        password: ''
+        email: '',
+        first_name:'',
+        family_name: '',
+        password1: '',
+        password2:'',
     };
 
     constructor(private authApi: AuthApiService, private router: Router)
     {}
 
-    updateLogin(event: any)
+    updateEmail(event: any)
     {
-        this.authentication.login = event.target.value;
+        this.authentication.email = event.target.value;
     }
 
-    updatePassword(event: any)
+    updatePassword1(event: any)
     {
-        this.authentication.password = event.target.value;
+        this.authentication.password1 = event.target.value;
     }
+    updatePassword2(event: any)
+    {
+        this.authentication.password2 = event.target.value;
+    }
+    updateFirst_name(event: any)
+    {
+        this.authentication.first_name = event.target.value;
+    }
+    updateFamily_name(event: any)
+    {
+        this.authentication.family_name = event.target.value;
+    }
+   
 
     register()
     {

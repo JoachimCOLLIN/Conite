@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthApiService} from './auth-api.service';
 import {Router} from "@angular/router";
+import { User } from './auth.model';
+
 
 
 @Component({
@@ -10,8 +12,8 @@ import {Router} from "@angular/router";
 <h2>Connexion</h2>
 <mat-form-field class="full-width">
 <input matInput
-placeholder="Identifiant"
-(keyup)="updateLogin($event)">
+placeholder="Adresse Email"
+(keyup)="updateEmail($event)">
 </mat-form-field>
 
 <mat-form-field class="full-width">
@@ -42,33 +44,19 @@ width: 100%;
 
 
 export class LoginComponent {
-    authentication = {
-        login: '',
-        password: ''
-    };
-
+    user= new User('','' ,[''],false);
     constructor(private authApi: AuthApiService, private router: Router)
     {}
-
-    updateLogin(event: any)
-    {
-        this.authentication.login = event.target.value;
-    }
-
-    updatePassword(event: any)
-    {
-        this.authentication.password = event.target.value;
-    }
 
     login()
     {
         this.authApi
-            .login(this.authentication)
+            .login(this.user)
             .subscribe(
                 () => this.router.navigate(['/']),
                 error => alert(error.message)
             );
 
-        sessionStorage.setItem('login', this.authentication.login);
+        sessionStorage.setItem('email', this.user.email);
     }
 }

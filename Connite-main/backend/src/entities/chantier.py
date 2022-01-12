@@ -12,8 +12,8 @@ class Chantier(Entity, Base):
     description = sqlalchemy.Column(sqlalchemy.String)
     localisation = sqlalchemy.Column(sqlalchemy.String)
     datedelancement = sqlalchemy.Column(sqlalchemy.String)
-    moderateurs = sqlalchemy.Column(sqlalchemy.String)
-
+    moderateurs = sqlalchemy.Column(sqlalchemy.Integer)
+    
     def __init__(self, title, description,localisation,datedelancement,moderateurs, created_by):
         Entity.__init__(self, created_by)
         self.title = title
