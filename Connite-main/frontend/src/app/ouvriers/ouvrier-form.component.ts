@@ -3,6 +3,7 @@ import {OuvriersApiService} from "./ouvriers-api.service";
 import {Router,ActivatedRoute} from "@angular/router";
 import {OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Ouvrier } from './ouvrier.model';
 
 
 @Component({
@@ -58,14 +59,7 @@ import { Subscription } from 'rxjs';
 
 export class OuvrierFormComponent implements OnInit{
     ouvriersListSubs : Subscription;
-    ouvrier = {
-        id_chantier : 0,
-        nom: '',
-        prenom: '',
-        age: '',
-        qualification: '',
-    };
-
+    ouvrier : Ouvrier;
     constructor(private ouvriersApi: OuvriersApiService, private router: Router, private route: ActivatedRoute)
     {}
 

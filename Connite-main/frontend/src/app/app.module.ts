@@ -22,7 +22,7 @@ import {AuthApiService} from './auth/auth-api.service';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
-import * as Auth0 from 'auth0-web';
+
 import { InformationsComponent } from './informationchantier/informations.component';
 import { ChantierComponent } from './chantiers/chantier.component';
 import {ListeOuvrierComponent} from './chantiers/listeouvrier.component';
@@ -68,21 +68,16 @@ const appRoutes: Routes = [
       MatIconModule,
       MatTableModule
   ],
+  
     providers: [
         ChantiersApiService,
         AuthApiService,
         OuvriersApiService,
+        InformationsApiService,
     ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor() {
-        Auth0.configure({
-          domain: 'dev-65v3zaee.us.auth0.com',
-          audience: 'https://online-exam.digituz.com.br',
-          clientID: 'TnsKt1kKB9xbKnHFJHvwE8AENEICnLDS',
-          redirectUri: 'http://localhost:4200/callback',
-          scope: 'openid profile manage:exams'
-        });
       }
  }

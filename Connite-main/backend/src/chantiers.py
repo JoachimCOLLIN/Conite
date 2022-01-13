@@ -21,7 +21,6 @@ def get_chantiers():
     session.close()
     return flask.jsonify(chantiers)
 
-
 @blueprint.route('/chantier/<chantier_id>')
 def get_chantier(chantier_id,methods=['Get']):
     print(f'get chantier : {chantier_id}')
@@ -36,6 +35,18 @@ def get_chantier(chantier_id,methods=['Get']):
 
     return flask.jsonify(new_chantier), 201
 
+@blueprint.route('/infos/<chantier_id>',methods=['POST'])
+def update_chantier(chantier_id):
+    print(1)
+    posted_chantier =flask.request.get_json()
+
+    db = get_session()
+    chantier = db.query(Chantier).filter_by(id=chantier_id).first()
+    chantier.title=posted_chantier["title"]
+    db.commit()
+    new_chantier = ChantierSchema().dump(chantier)
+    db.close()
+    return flask.jsonify(new_chantier), 201
 
 @blueprint.route('/chantiers', methods=['POST'])
 #@requires_auth

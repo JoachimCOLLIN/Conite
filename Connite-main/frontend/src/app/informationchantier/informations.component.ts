@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
 import {InformationsApiService} from './informations-api.service';
 import {Chantier} from '../chantiers/chantier.model';
-import {ChantiersApiService} from '../chantiers/chantiers-api.service';
 @Component({
     selector: 'infos',
     template: `
@@ -74,7 +73,7 @@ export class InformationsComponent implements OnInit {
 
     constructor(
       private route: ActivatedRoute,
-      private chantiersApi: ChantiersApiService,
+      private infosApi: InformationsApiService,
       private router: Router,
 //      private infosApi : InformationsApiService
 
@@ -104,13 +103,13 @@ export class InformationsComponent implements OnInit {
     updateChantier()
     {
       console.log("test")
-        this.chantiersApi
-            .saveChantier(this.chantier)
+        this.infosApi
+            .updateChantier(this.chantier)
             .subscribe(
                 () => this.router.navigate(['/']),
                 error => alert(error.message)
             );
-      console.log("test")
+      
 
     }
 
@@ -118,9 +117,10 @@ export class InformationsComponent implements OnInit {
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
         this.id = +this.route.snapshot.paramMap.get('id')
-      this.chantiersListSubs = this.chantiersApi
+      this.chantiersListSubs = this.infosApi
           .getChantiers()
           .subscribe(res => {this.chantier = res[this.id-1];}, console.error);
+      console.log(this.chantiersListSubs)
 //      this.chantiersListSubs = this.infosApi
 //          .getChantiers(this.id)
 //          .subscribe(res => {this.chantier = res;}, console.error);

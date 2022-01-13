@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
 import {Ouvrier} from './ouvrier.model';
-import * as Auth0 from 'auth0-web';
+
 
 @Injectable()
 export class OuvriersApiService
@@ -26,23 +26,15 @@ export class OuvriersApiService
     }
 
     saveOuvrier(ouvrier: Ouvrier): Observable<any> {
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Authorization': `Bearer ${Auth0.getAccessToken()}`
-          })
-        };
+        
         return this.http
-          .post(`${API_URL}/ouvriers`, ouvrier, httpOptions);
+          .post(`${API_URL}/ouvriers`, ouvrier);
     }
 
     saveOuvrierId(ouvrier: Ouvrier, id : number): Observable<any> {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': `Bearer ${Auth0.getAccessToken()}`
-        })
-      };
+      
       return this.http
-        .post(`${API_URL}/ouvriers/${id}`, ouvrier, httpOptions);
+        .post(`${API_URL}/ouvriers/${id}`, ouvrier);
   }
     
 

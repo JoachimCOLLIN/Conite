@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {Chantier} from './chantier.model';
 import {ChantiersApiService} from './chantiers-api.service';
-import * as Auth0 from 'auth0-web';
 
 
 @Component({

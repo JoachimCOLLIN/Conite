@@ -20,21 +20,23 @@ export class InformationsApiService
     }
 
     // GET list of public, future events
-    getChantiers(id : number)
+    getChantiers()
     {
         return this.http
-            .get<Chantier[]>(`${API_URL}/chantiers/${id}`)
+            .get<Chantier[]>(`${API_URL}/chantiers`)
             .pipe(catchError(InformationsApiService.handleError));
     }
 
-    saveChantier(chantier: Chantier): Observable<any> {
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Authorization': `Bearer ${Auth0.getAccessToken()}`
-          })
-        };
+
+    updateChantier(chantier: Chantier): Observable<any> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${Auth0.getAccessToken()}`
+        })
+      };
         return this.http
-          .post(`${API_URL}/chantiers`, chantier, httpOptions);
+          .post(`${API_URL}/infos/${chantier.id}`, chantier)
+          .pipe(catchError(InformationsApiService.handleError))
     }
     
 
