@@ -10,14 +10,12 @@ import {Router} from "@angular/router";
 <h2>Connexion</h2>
 <mat-form-field class="full-width">
 <input matInput
-placeholder="Identifiant"
-(keyup)="updateLogin($event)">
+placeholder="Adresse Email">
 </mat-form-field>
 
 <mat-form-field class="full-width">
 <input type="password" matInput
-placeholder="Mot de passe"
-(keyup)="updatePassword($event)">
+placeholder="Mot de passe">
 </mat-form-field>
 
 <button mat-raised-button
