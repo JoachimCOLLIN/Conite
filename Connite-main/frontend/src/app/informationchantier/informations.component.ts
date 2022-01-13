@@ -75,8 +75,6 @@ export class InformationsComponent implements OnInit {
       private route: ActivatedRoute,
       private infosApi: InformationsApiService,
       private router: Router,
-//      private infosApi : InformationsApiService
-
     ) {}
     updateTitle(event: any)
     {

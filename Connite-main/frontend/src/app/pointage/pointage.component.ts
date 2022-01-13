@@ -43,9 +43,17 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
     <ng-container matColumnDef="heures">
     <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Heures </th>
     <td mat-cell *matCellDef="let row" >
-    <button mat-button><mat-icon align="end" >delete</mat-icon></button>
+
     </td>
   </ng-container>
+
+
+  <ng-container matColumnDef="primes">
+  <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Primes </th>
+  <td mat-cell *matCellDef="let row" >
+  </td>
+</ng-container>
+
 
 
   
@@ -85,7 +93,7 @@ export class PointageComponent implements OnInit {
     id = 0;
     ouvriersListSubs: Subscription;
     ouvrier : Ouvrier[];
-    displayedColumns: string[] = [ 'nom', 'prenom', 'age','qualification','heures'];
+    displayedColumns: string[] = [ 'nom', 'prenom', 'age','qualification','heures','primes'];
   
 
 
