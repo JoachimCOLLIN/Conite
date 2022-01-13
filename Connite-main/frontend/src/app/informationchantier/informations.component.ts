@@ -17,25 +17,25 @@ import {Chantier} from '../chantiers/chantier.model';
 
   <mat-form-field class="full-width">
     <input matInput
-           placeholder="Description : "
+           placeholder="Description : {{chantier.description}}"
            (keyup)="updateDescription($event)">
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <input matInput
-           placeholder="Localisaiton : "
+           placeholder="Localisaiton : {{chantier.localisation}}"
            (keyup)="updateLocalisation($event)">
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <input matInput
-          placeholder="Date de lancement : "
+          placeholder="Date de lancement : {{chantier.datedelancement}}"
           (keyup)="updateDateDeLancement($event)">
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <input matInput
-          placeholder="Moderateurs : "
+          placeholder="Moderateurs : {{chantier.moderateurs}}"
           (keyup)="updateModerateurs($event)">
   </mat-form-field>
 

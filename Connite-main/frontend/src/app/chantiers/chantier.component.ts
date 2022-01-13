@@ -12,7 +12,7 @@ import { Chantier } from './chantier.model';
     <div>
         <section>                                     
             <button mat-raised-button color="Basic1" class ="big_button" [routerLink] = "['/listedesouvriers',chantier.id]">Liste des ouvriers</button> 
-            <button mat-raised-button color="Basic2" class ="big_button">Pointage</button>
+            <button mat-raised-button color="Basic2" class ="big_button" [routerLink] = "['/pointage',chantier.id]">Pointage</button>
             <button mat-raised-button color="Basic3" class ="big_button">Fiches de paie</button> 
             <button mat-raised-button color="Basic4" class ="big_button">Statistiques</button> 
         </section> 

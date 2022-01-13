@@ -27,6 +27,9 @@ import { InformationsComponent } from './informationchantier/informations.compon
 import { ChantierComponent } from './chantiers/chantier.component';
 import {ListeOuvrierComponent} from './chantiers/listeouvrier.component';
 import { OuvrierFormComponent } from './ouvriers/ouvrier-form.component';
+import { PointageApiService } from './pointage/pointage-api.serivce';
+import { PointageComponent } from './pointage/pointage.component';
+
 
 const appRoutes: Routes = [
     {path: '', component: ChantiersComponent},
@@ -38,7 +41,8 @@ const appRoutes: Routes = [
     {path: 'infos/:id', component: InformationsComponent},
     {path: 'chantier/:id',component : ChantierComponent},
     {path: 'listedesouvriers/:id', component: ListeOuvrierComponent},
-    {path: 'new-ouvrier/:id', component : OuvrierFormComponent}
+    {path: 'new-ouvrier/:id', component : OuvrierFormComponent},
+    {path: 'pointage/:id', component: PointageComponent,}
 ];
 
 
@@ -55,6 +59,7 @@ const appRoutes: Routes = [
       ChantierComponent,
       ListeOuvrierComponent,
       OuvrierFormComponent,
+      PointageComponent,
   ],
   imports: [
       BrowserModule,
@@ -74,6 +79,7 @@ const appRoutes: Routes = [
         AuthApiService,
         OuvriersApiService,
         InformationsApiService,
+        PointageApiService,
     ],
     bootstrap: [AppComponent]
 })
