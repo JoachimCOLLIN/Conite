@@ -13,13 +13,13 @@ import { User } from './auth.model';
 <mat-form-field class="full-width">
 <input matInput
 placeholder="Adresse Email"
-(keyup)="updateEmail($event)">
+>
 </mat-form-field>
 
 <mat-form-field class="full-width">
 <input type="password" matInput
 placeholder="Mot de passe"
-(keyup)="updatePassword($event)">
+>
 </mat-form-field>
 
 <button mat-raised-button

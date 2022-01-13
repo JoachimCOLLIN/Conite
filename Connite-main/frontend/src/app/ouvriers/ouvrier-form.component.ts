@@ -37,11 +37,11 @@ import { Ouvrier } from './ouvrier.model';
 
 
         <button mat-raised-button
-                color="primary"
-                (click)="saveOuvrier()">
-          Enregistrer Ouvrier
+        color="primary"
+        (click)="saveOuvrier()">
+          <mat-icon>person_add</mat-icon>      
         </button>
-    </mat-card>
+        </mat-card>
   `,
   styles: [`
     .chantiers-form {

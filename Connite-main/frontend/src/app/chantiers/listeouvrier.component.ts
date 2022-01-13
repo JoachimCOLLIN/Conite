@@ -42,6 +42,13 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.qualification}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+    <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Actions </th>
+    <td mat-cell *matCellDef="let row" >
+    <button mat-button><mat-icon align="end" >delete</mat-icon></button>
+    </td>
+  </ng-container>
+
 
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -50,7 +57,7 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
 
    <button mat-fab color="primary" 
    class="new-chantier" [routerLink] = "['/new-ouvrier',id]">
-<i class="material-icons">note_add</i>
+   <i class="material-icons">person_add</i>
 </button>
   
 
@@ -85,7 +92,7 @@ export class ListeOuvrierComponent implements OnInit {
     id = 0;
     ouvriersListSubs: Subscription;
     ouvrier : Ouvrier[];
-    displayedColumns: string[] = [ 'nom', 'prenom', 'age','qualification'];
+    displayedColumns: string[] = [ 'nom', 'prenom', 'age','qualification','actions'];
   
 
 

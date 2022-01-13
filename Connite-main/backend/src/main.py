@@ -2,8 +2,6 @@ import os
 
 import flask
 import flask_cors
-
-from . import auth
 from . import db
 from . import chantiers
 from .entities.base import Base
@@ -39,7 +37,6 @@ def create_app(test_config=None):
         Base.metadata.create_all(db.get_engine())
 
     #regroupement de fonctions factoriser notre code
-    app.register_blueprint(auth.blueprint)
     app.register_blueprint(chantiers.blueprint)
     app.register_blueprint(ouvriers.blueprint)
 
