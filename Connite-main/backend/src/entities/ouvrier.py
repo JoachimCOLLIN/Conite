@@ -7,10 +7,10 @@ from .base import Base
 
 class Ouvrier(Entity, Base):
     __tablename__ = 'ouvriers'
-    id_chantier  = sqlalchemy.Column(sqlalchemy.String)
+    id_chantier  = sqlalchemy.Column(sqlalchemy.Integer)
     nom = sqlalchemy.Column(sqlalchemy.String)
     prenom = sqlalchemy.Column(sqlalchemy.String)
-    age = sqlalchemy.Column(sqlalchemy.String)
+    age = sqlalchemy.Column(sqlalchemy.Integer)
     qualification = sqlalchemy.Column(sqlalchemy.String)
     
 
@@ -26,7 +26,7 @@ class Ouvrier(Entity, Base):
 
 class OuvrierSchema(marshmallow.Schema): 
     id = marshmallow.fields.Number()
-    id_chantier = marshmallow.fields.Str()
+    id_chantier = marshmallow.fields.Number()
     nom = marshmallow.fields.Str()
     prenom = marshmallow.fields.Str()
     age = marshmallow.fields.Number()

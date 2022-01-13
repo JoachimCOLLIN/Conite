@@ -119,9 +119,6 @@ export class InformationsComponent implements OnInit {
           .getChantiers()
           .subscribe(res => {this.chantier = res[this.id-1];}, console.error);
       console.log(this.chantiersListSubs)
-//      this.chantiersListSubs = this.infosApi
-//          .getChantiers(this.id)
-//          .subscribe(res => {this.chantier = res;}, console.error);
       const self = this; 
 
       });

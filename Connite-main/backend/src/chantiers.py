@@ -21,8 +21,8 @@ def get_chantiers():
     session.close()
     return flask.jsonify(chantiers)
 
-@blueprint.route('/chantier/<chantier_id>')
-def get_chantier(chantier_id,methods=['Get']):
+@blueprint.route('/chantier/<chantier_id>',methods=['Get'])
+def get_chantier(chantier_id):
     print(f'get chantier : {chantier_id}')
 
     # TODO ensure the chantier_id gives an existing chantier
@@ -43,6 +43,10 @@ def update_chantier(chantier_id):
     db = get_session()
     chantier = db.query(Chantier).filter_by(id=chantier_id).first()
     chantier.title=posted_chantier["title"]
+    chantier.description=posted_chantier["description"]
+    chantier.localisation=posted_chantier["localisation"]
+    chantier.datedelancement=posted_chantier["datedelancement"]
+    chantier.moderateurs=posted_chantier["moderateurs"]
     db.commit()
     new_chantier = ChantierSchema().dump(chantier)
     db.close()
@@ -51,7 +55,6 @@ def update_chantier(chantier_id):
 @blueprint.route('/chantiers', methods=['POST'])
 #@requires_auth
 def add_chantier():
-    # mount chantier object
     posted_chantier = ChantierSchema(
         only=('title', 'description','localisation','datedelancement','moderateurs')).load(flask.request.get_json())
 
@@ -77,3 +80,5 @@ def delete_chantier(chantier_id):
     db.commit()
     db.close()
     return '', 201
+
+

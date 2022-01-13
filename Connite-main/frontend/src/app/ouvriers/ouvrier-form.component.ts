@@ -59,7 +59,13 @@ import { Ouvrier } from './ouvrier.model';
 
 export class OuvrierFormComponent implements OnInit{
     ouvriersListSubs : Subscription;
-    ouvrier : Ouvrier;
+    ouvrier ={
+      id_chantier:0,
+      nom: '',
+      prenom: '',
+      age: 0,
+      qualification: '',
+    };
     constructor(private ouvriersApi: OuvriersApiService, private router: Router, private route: ActivatedRoute)
     {}
 

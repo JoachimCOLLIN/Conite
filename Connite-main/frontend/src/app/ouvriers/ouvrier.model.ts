@@ -4,7 +4,7 @@ export class Ouvrier
         public id_chantier: number,
         public nom: string,
         public prenom: string,
-        public age: string,
+        public age: number,
         public qualification: string,
         public id?: number,
         public updatedAt?: Date,
