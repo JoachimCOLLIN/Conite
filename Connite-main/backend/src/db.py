@@ -11,6 +11,7 @@ def get_engine():
     return g.engine
 
 
+
 def get_session():
     if 'session' not in g:
         g.session = sqlalchemy.orm.sessionmaker(bind=get_engine())()
