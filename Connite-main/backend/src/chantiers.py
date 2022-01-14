@@ -21,7 +21,7 @@ def get_chantiers():
     session.close()
     return flask.jsonify(chantiers)
 
-@blueprint.route('/chantier/<chantier_id>',methods=['Get'])
+@blueprint.route('/chantier',methods=['Get'])
 def get_chantier(chantier_id):
     print(f'get chantier : {chantier_id}')
 

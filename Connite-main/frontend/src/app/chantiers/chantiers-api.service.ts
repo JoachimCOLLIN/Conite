@@ -25,6 +25,13 @@ export class ChantiersApiService
             .pipe(catchError(ChantiersApiService.handleError));
     }
 
+    getChantier(id:number)
+    {
+        return this.http
+            .get<Chantier>(`${API_URL}/chantier`)
+            .pipe(catchError(ChantiersApiService.handleError));
+    }
+
     saveChantier(chantier: Chantier): Observable<any> {
         const httpOptions = {
           headers: new HttpHeaders({

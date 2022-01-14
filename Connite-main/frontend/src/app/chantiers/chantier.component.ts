@@ -8,11 +8,11 @@ import { Chantier } from './chantier.model';
 @Component({
     selector: 'chantier',
     template: `
-    <div class ="mon_chantier">Mon Chantier: {{chantier.title}}</div>
+    <div class ="mon_chantier">Mon Chantier: {{chantier?.title}}</div>
     <div>
         <section>                                     
-            <button mat-raised-button color="Basic1" class ="big_button" [routerLink] = "['/listedesouvriers',id]">Liste des ouvriers</button> 
-            <button mat-raised-button color="Basic2" class ="big_button" [routerLink] = "['/pointage',chantier.id]">Pointage</button>
+            <button mat-raised-button color="Basic1" class ="big_button" [routerLink] = "['/listedesouvriers',chantier?.id]">Liste des ouvriers</button> 
+            <button mat-raised-button color="Basic2" class ="big_button" [routerLink] = "['/pointage',chantier?.id]">Pointage</button>
             <button mat-raised-button color="Basic3" class ="big_button">Fiches de paie</button> 
             <button mat-raised-button color="Basic4" class ="big_button">Statistiques</button> 
         </section> 
@@ -56,7 +56,7 @@ import { Chantier } from './chantier.model';
 
 export class ChantierComponent implements OnInit {
 
-    id = 0;
+    id : number
     chantiersListSubs: Subscription;
     chantier : Chantier;
     
@@ -65,22 +65,22 @@ export class ChantierComponent implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private chantiersApi: ChantiersApiService,
-      private router: Router,
     ) {
         this.chantier = new Chantier("","","","","");
+        this.id = 0;
     }
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
-        this.id = +this.route.snapshot.paramMap.get('id')
+        this.id = +this.route.snapshot.paramMap.get('id')});
+        console.log(this.chantier);
       this.chantiersListSubs = this.chantiersApi
           .getChantiers()
-          .subscribe(res => {this.chantier = res[this.id-1];}, console.error);
-          console.log(this.id)
+          .subscribe(res => {this.chantier = res[this.id-2];}, console.error);
+        console.log(this.chantier);
 
       const self = this; 
 
-      });
     
 
       };
