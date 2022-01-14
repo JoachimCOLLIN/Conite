@@ -60,8 +60,10 @@ export class ChantiersComponent implements OnInit, OnDestroy
             .deleteChantier(chantierId)
             .subscribe(() => {
                 this.chantiersListSubs = this.chantiersApi.getChantiers().subscribe(
-                    res => {this.chantiersList = res;}, console.error)}, console.error);
-    }
+                    res => {this.chantiersList = res;}, console.error)}, console.error); 
+            console.log(this.chantiersList[0].title)
+            console.log(this.chantiersList[0].id)
+                  }
 
     isAdmin()
     {

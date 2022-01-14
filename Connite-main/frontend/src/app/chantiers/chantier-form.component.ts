@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ChantiersApiService} from "./chantiers-api.service";
 import {Router} from "@angular/router";
+import { Chantier } from './chantier.model';
 
 
 @Component({
@@ -61,16 +62,10 @@ import {Router} from "@angular/router";
 
 
 export class ChantierFormComponent {
-    chantier = {
-        title: '',
-        description: '',
-        localisation: '',
-        moderateurs: '',
-        datedelancement: '',
-    };
+    chantier : Chantier;
 
     constructor(private chantiersApi: ChantiersApiService, private router: Router)
-    {}
+    { this.chantier = new Chantier("","","","","");}
 
     updateTitle(event: any)
     {

@@ -104,6 +104,7 @@ export class ListeOuvrierComponent implements OnInit {
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
         this.id = +this.route.snapshot.paramMap.get('id')
+        console.log(this.id)
       this.ouvriersListSubs = this.ouvriersApi
           .getOuvriers()
           .subscribe(res => {this.ouvrier = res;}, console.error);

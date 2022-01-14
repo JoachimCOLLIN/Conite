@@ -11,7 +11,7 @@ import { Chantier } from './chantier.model';
     <div class ="mon_chantier">Mon Chantier: {{chantier.title}}</div>
     <div>
         <section>                                     
-            <button mat-raised-button color="Basic1" class ="big_button" [routerLink] = "['/listedesouvriers',chantier.id]">Liste des ouvriers</button> 
+            <button mat-raised-button color="Basic1" class ="big_button" [routerLink] = "['/listedesouvriers',id]">Liste des ouvriers</button> 
             <button mat-raised-button color="Basic2" class ="big_button" [routerLink] = "['/pointage',chantier.id]">Pointage</button>
             <button mat-raised-button color="Basic3" class ="big_button">Fiches de paie</button> 
             <button mat-raised-button color="Basic4" class ="big_button">Statistiques</button> 
@@ -66,7 +66,9 @@ export class ChantierComponent implements OnInit {
       private route: ActivatedRoute,
       private chantiersApi: ChantiersApiService,
       private router: Router,
-    ) {}
+    ) {
+        this.chantier = new Chantier("","","","","");
+    }
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
@@ -74,6 +76,8 @@ export class ChantierComponent implements OnInit {
       this.chantiersListSubs = this.chantiersApi
           .getChantiers()
           .subscribe(res => {this.chantier = res[this.id-1];}, console.error);
+          console.log(this.id)
+
       const self = this; 
 
       });
