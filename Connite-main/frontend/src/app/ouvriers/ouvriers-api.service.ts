@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
 import {Ouvrier} from './ouvrier.model';
+import { Chantier } from '../chantiers/chantier.model';
 
 
 @Injectable()
@@ -38,9 +39,9 @@ export class OuvriersApiService
   }
     
 
-    deleteOuvrier(ouvrierId: number,chantier)
+    deleteOuvrier(chantierId: number,ouvrierId: number)
     {
-        return this.http.delete(`${API_URL}/ouvriers_delete/${ouvrierId}/${ouvrierId}`);
+        return this.http.delete(`${API_URL}/ouvriers_delete/${ouvrierId}/${chantierId}`);
     }
 
 

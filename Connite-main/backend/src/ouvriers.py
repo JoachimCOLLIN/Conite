@@ -43,13 +43,25 @@ def add_ouvrier():
     return flask.jsonify(new_ouvrier), 201
 
 
-@blueprint.route('/ouvriers/<ouvrier_id>', methods=['DELETE'])
+# @blueprint.route('/ouvriers/<ouvrier_id>', methods=['DELETE'])
+# #@requires_admin
+# def delete_ouvrier(ouvrier_id):
+#     db = get_session()
+#     ouvrier = db.query(Ouvrier).filter_by(id=ouvrier_id).first()
+#     db.delete(ouvrier)
+#     db.commit()
+#     db.close()
+#     return '', 201
+
+@blueprint.route('/ouvriers_delete/<ouvrier_id>/<chantier_id>', methods=['DELETE'])
 #@requires_admin
-def delete_ouvrier(ouvrier_id):
+def delete_ouvrier(ouvrier_id,chantier_id):
     db = get_session()
-    ouvrier = db.query(Ouvrier).filter_by(id=ouvrier_id).first()
+    print("*********************************************")
+    print(ouvrier_id,chantier_id)
+    ouvrier = db.query(Ouvrier).filter_by(id=ouvrier_id).filter(Ouvrier.id_chantier>=int(chantier_id)).filter(Ouvrier.id_chantier< int(chantier_id)+1).first()
+    print(ouvrier)
     db.delete(ouvrier)
     db.commit()
     db.close()
     return '', 201
-

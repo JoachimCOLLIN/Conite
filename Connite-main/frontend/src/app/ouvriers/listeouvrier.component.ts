@@ -104,6 +104,8 @@ export class ListeOuvrierComponent implements OnInit {
 
     delete(chantierId: number,ouvrierId : number)
     {
+      console.log(chantierId)
+      console.log(ouvrierId)
         this.ouvriersApi
             .deleteOuvrier(chantierId,ouvrierId)
             .subscribe(() => {
