@@ -57,10 +57,7 @@ def add_ouvrier():
 #@requires_admin
 def delete_ouvrier(ouvrier_id,chantier_id):
     db = get_session()
-    print("*********************************************")
-    print(ouvrier_id,chantier_id)
     ouvrier = db.query(Ouvrier).filter_by(id=ouvrier_id).filter(Ouvrier.id_chantier>=int(chantier_id)).filter(Ouvrier.id_chantier< int(chantier_id)+1).first()
-    print(ouvrier)
     db.delete(ouvrier)
     db.commit()
     db.close()

@@ -44,7 +44,7 @@ import { OuvriersApiService } from './ouvriers-api.service';
     </ng-container>
 
     <ng-container matColumnDef="actions">
-    <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Actions </th>
+    <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Supprimer cet ouvrier </th>
     <td mat-cell *matCellDef="let element">
     <button mat-button (click)="delete(id,element.id)"><mat-icon align="end" >delete</mat-icon></button>
     </td>
@@ -104,9 +104,7 @@ export class ListeOuvrierComponent implements OnInit {
 
     delete(chantierId: number,ouvrierId : number)
     {
-      console.log(chantierId)
-      console.log(ouvrierId)
-        this.ouvriersApi
+      this.ouvriersApi
             .deleteOuvrier(chantierId,ouvrierId)
             .subscribe(() => {
                 this.ouvriersListSubs = this.ouvriersApi.getOuvriers(this.id).subscribe(
