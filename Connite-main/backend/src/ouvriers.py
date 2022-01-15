@@ -6,11 +6,12 @@ from .entities.ouvrier import Ouvrier, OuvrierSchema
 blueprint = flask.Blueprint('ouvriers', __name__)
 
 
-@blueprint.route('/ouvriers')
-def get_ouvriers():
+@blueprint.route('/ouvriers_chantier/<chantier_id>')
+def get_ouvriers(chantier_id):
     # fetching from the database
     session = get_session()
-    ouvrier_objects = session.query(Ouvrier).all()
+    print(int(chantier_id))
+    ouvrier_objects = session.query(Ouvrier).filter(Ouvrier.id_chantier >= int(chantier_id)).filter(Ouvrier.id_chantier < int(chantier_id)+1).all()
 
     # transforming into JSON-serializable objects
     schema = OuvrierSchema(many=True)
@@ -21,7 +22,7 @@ def get_ouvriers():
     return flask.jsonify(ouvriers)
 
 
-@blueprint.route('/ouvriers', methods=['POST'])
+@blueprint.route('/ouvriers_add', methods=['POST'])
 #@requires_auth
 def add_ouvrier():
     # mount exam object
@@ -29,8 +30,9 @@ def add_ouvrier():
         only=('id_chantier','nom','prenom','age','qualification')).load(flask.request.get_json())
 
     ouvrier = Ouvrier(**posted_ouvrier, created_by="HTTP post request")
-
+    print(type(ouvrier.id_chantier))
     # persist exam
+
     session = get_session()
     session.add(ouvrier)
     session.commit()
@@ -50,3 +52,4 @@ def delete_ouvrier(ouvrier_id):
     db.commit()
     db.close()
     return '', 201
+

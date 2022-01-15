@@ -21,13 +21,13 @@ def get_chantiers():
     session.close()
     return flask.jsonify(chantiers)
 
-@blueprint.route('/chantier',methods=['Get'])
-def get_chantier(chantier_id):
-    print(f'get chantier : {chantier_id}')
+
+@blueprint.route('/chantier/<id_chantier>',methods=['Get'])
+def get_chantier(id_chantier):
 
     # TODO ensure the chantier_id gives an existing chantier
     db = get_session()
-    chantier = db.query(Chantier).filter_by(id=chantier_id).first()
+    chantier = db.query(Chantier).filter_by(id=id_chantier).first()
     db.close()
 
     new_chantier = ChantierSchema().dump(chantier)

@@ -25,10 +25,10 @@ export class ChantiersApiService
             .pipe(catchError(ChantiersApiService.handleError));
     }
 
-    getChantier(id:number)
+    getChantier(id_chantier:number)
     {
         return this.http
-            .get<Chantier>(`${API_URL}/chantier`)
+            .get<Chantier>(`${API_URL}/chantier/${id_chantier}`)
             .pipe(catchError(ChantiersApiService.handleError));
     }
 

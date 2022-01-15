@@ -106,7 +106,7 @@ export class PointageComponent implements OnInit {
       this.route.queryParams.subscribe(params => {
         this.id = +this.route.snapshot.paramMap.get('id')
       this.ouvriersListSubs = this.ouvriersApi
-          .getOuvriers()
+          .getOuvriers(this.id)
           .subscribe(res => {this.ouvrier = res;}, console.error);
       const self = this; 
 

@@ -38,7 +38,7 @@ import { Ouvrier } from './ouvrier.model';
 
         <button mat-raised-button
         color="primary"
-        (click)="saveOuvrier()">
+        (click)="addOuvrier()">
           <mat-icon>person_add</mat-icon>      
         </button>
         </mat-card>
@@ -60,6 +60,7 @@ import { Ouvrier } from './ouvrier.model';
 export class OuvrierFormComponent implements OnInit{
     ouvriersListSubs : Subscription;
     ouvrier : Ouvrier;
+    id : number;
     constructor(private ouvriersApi: OuvriersApiService, private router: Router, private route: ActivatedRoute)
     {this.ouvrier = new Ouvrier(0,'','',0,'')}
 
@@ -83,19 +84,18 @@ export class OuvrierFormComponent implements OnInit{
         this.ouvrier.qualification = event.target.value;
     }
 
-    saveOuvrier()
-    {
+    addOuvrier()
+    {   
         this.ouvriersApi
             .saveOuvrier(this.ouvrier)
             .subscribe(
-                () => this.router.navigate(['/']),
+                () => this.router.navigate(['/listedesouvriers/' + String(this.ouvrier.id_chantier)]),
                 error => alert(error.message)
             );
     }
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
           this.ouvrier.id_chantier = +this.route.snapshot.paramMap.get('id');
-
         const self = this; 
   
         });

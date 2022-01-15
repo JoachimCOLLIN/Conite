@@ -25,7 +25,7 @@ import {CallbackComponent} from './callback.component';
 
 import { InformationsComponent } from './informationchantier/informations.component';
 import { ChantierComponent } from './chantiers/chantier.component';
-import {ListeOuvrierComponent} from './chantiers/listeouvrier.component';
+import {ListeOuvrierComponent} from './ouvriers/listeouvrier.component';
 import { OuvrierFormComponent } from './ouvriers/ouvrier-form.component';
 import { PointageApiService } from './pointage/pointage-api.serivce';
 import { PointageComponent } from './pointage/pointage.component';

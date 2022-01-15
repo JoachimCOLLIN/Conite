@@ -18,17 +18,17 @@ export class OuvriersApiService
     }
 
     // GET list of public, future events
-    getOuvriers()
+    getOuvriers(chantierId: number)
     {
         return this.http
-            .get<Ouvrier[]>(`${API_URL}/ouvriers`)
+            .get<Ouvrier[]>(`${API_URL}/ouvriers_chantier/${chantierId}`)
             .pipe(catchError(OuvriersApiService.handleError));
     }
 
     saveOuvrier(ouvrier: Ouvrier): Observable<any> {
         
         return this.http
-          .post(`${API_URL}/ouvriers`, ouvrier);
+          .post(`${API_URL}/ouvriers_add`, ouvrier);
     }
 
     saveOuvrierId(ouvrier: Ouvrier, id : number): Observable<any> {
@@ -38,9 +38,9 @@ export class OuvriersApiService
   }
     
 
-    deleteOuvrier(ouvrierId: number)
+    deleteOuvrier(ouvrierId: number,chantier)
     {
-        return this.http.delete(`${API_URL}/ouvriers/${ouvrierId}`);
+        return this.http.delete(`${API_URL}/ouvriers_delete/${ouvrierId}/${ouvrierId}`);
     }
 
 

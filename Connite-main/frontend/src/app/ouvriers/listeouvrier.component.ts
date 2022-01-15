@@ -2,16 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
-import {Chantier} from './chantier.model';
-import {ChantiersApiService} from './chantiers-api.service';
-import { Ouvrier } from '../ouvriers/ouvrier.model';
-import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
+import {Chantier} from '../chantiers/chantier.model';
+import {ChantiersApiService} from '../chantiers/chantiers-api.service';
+import { Ouvrier } from './ouvrier.model';
+import { OuvriersApiService } from './ouvriers-api.service';
 
 
 
 @Component({
     selector: 'liste-ouvrier',
     template: `
+
     <table mat-table [dataSource]="ouvrier" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -44,8 +45,8 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
 
     <ng-container matColumnDef="actions">
     <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Actions </th>
-    <td mat-cell *matCellDef="let row" >
-    <button mat-button><mat-icon align="end" >delete</mat-icon></button>
+    <td mat-cell *matCellDef="let element">
+    <button mat-button (click)="delete(id,element.id)"><mat-icon align="end" >delete</mat-icon></button>
     </td>
   </ng-container>
 
@@ -72,7 +73,7 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
       position: fixed;
       bottom: 15px;
       right: 15px;
-    }
+    }+
     
     button.material-icons{
       position : absolute;
@@ -101,19 +102,30 @@ export class ListeOuvrierComponent implements OnInit {
       private ouvriersApi: OuvriersApiService,
     ) {}
 
+    delete(chantierId: number,ouvrierId : number)
+    {
+        this.ouvriersApi
+            .deleteOuvrier(chantierId,ouvrierId)
+            .subscribe(() => {
+                this.ouvriersListSubs = this.ouvriersApi.getOuvriers(this.id).subscribe(
+                    res => {this.ouvrier = res;}, console.error)}, console.error); 
+                  }
+
+
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
-        this.id = +this.route.snapshot.paramMap.get('id')
-        console.log(this.id)
+        this.id = +this.route.snapshot.paramMap.get('id');
+        console.log(this.id);
       this.ouvriersListSubs = this.ouvriersApi
-          .getOuvriers()
+          .getOuvriers(this.id)
           .subscribe(res => {this.ouvrier = res;}, console.error);
       const self = this; 
 
       });
-    
 
       };
+
+
     }
 
         
