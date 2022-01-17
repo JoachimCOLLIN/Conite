@@ -3,6 +3,7 @@ import flask
 
 from .db import get_session
 from .entities.chantier import Chantier, ChantierSchema
+from .entities.ouvrier import Ouvrier, OuvrierSchema
 
 blueprint = flask.Blueprint('chantiers', __name__)
 
@@ -77,6 +78,9 @@ def delete_chantier(chantier_id):
     db = get_session()
     chantier = db.query(Chantier).filter_by(id=chantier_id).first()
     db.delete(chantier)
+    ouvriers = db.query(Ouvrier).filter(Ouvrier.id_chantier>=int(chantier_id)).filter(Ouvrier.id_chantier< int(chantier_id)+1).all()
+    for ouvrier in ouvriers:
+        db.delete(ouvrier)
     db.commit()
     db.close()
     return '', 201
