@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
 import { Ouvrier } from '../ouvriers/ouvrier.model';
 import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -14,45 +16,54 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-  
+  >
+
+
     <!-- Position Column -->
     <!-- Name Column -->
     <ng-container matColumnDef="nom">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Nom </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.nom}} </td>
     </ng-container>
-  
     <!-- Weight Column -->
     <ng-container matColumnDef="prenom">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Prenom </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.prenom}} </td>
     </ng-container>
-  
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Age </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.age}} </td>
     </ng-container>
-
-
     <!-- Symbol Column -->
     <ng-container matColumnDef="qualification">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Qualification </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.qualification}} </td>
     </ng-container>
-
     <ng-container matColumnDef="heures">
-    <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Heures </th>
+    <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Heures </th>
     <td mat-cell *matCellDef="let row" >
-
     </td>
   </ng-container>
-
-
   <ng-container matColumnDef="primes">
-  <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Primes </th>
+  <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Primes </th>
   <td mat-cell *matCellDef="let row" >
   </td>
 </ng-container>
+
+<ng-container matColumnDef="date">
+<th mat-header-cell *matHeaderCellDef></th>
+<td mat-cell *matCellDef="let element">    
+
+<mat-form-field [style.width.px]=100 floatlabel = "always">
+<mat-label>{{todayDate}}</mat-label>
+  <input matInput [matDatepicker] = "myDatePicker" (keyup)="updateDate($event)">
+  <mat-datepicker-toggle [for] = "myDatePicker" matSuffix></mat-datepicker-toggle>
+  <mat-datepicker #myDatePicker ></mat-datepicker>
+</mat-form-field>
+</td>
+
+</ng-container>
+
 
 
 
@@ -81,7 +92,14 @@ import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
       top : 3px;
     }
     
-    
+    .mat-column-date {
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 10% !important;
+    }
+    .mat-form-field{
+      width = 100 px;
+    }
 
 
 `]
@@ -93,14 +111,23 @@ export class PointageComponent implements OnInit {
     id = 0;
     ouvriersListSubs: Subscription;
     ouvrier : Ouvrier[];
-    displayedColumns: string[] = [ 'nom', 'prenom', 'age','qualification','heures','primes'];
+    displayedColumns: string[] = ['nom', 'prenom', 'age','qualification','heures','primes','date'];
+    myDate : Date;
+    todayDate : String;
   
 
 
     constructor(
       private route: ActivatedRoute,
       private ouvriersApi: OuvriersApiService,
-    ) {}
+      private datepipe : DatePipe,
+    ) { 
+      this.todayDate =this.datepipe.transform((new Date), 'MM/dd/yyyy');       }
+
+    updateDate(event: any)
+    {
+        console.log(event.target.value)
+    }
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {

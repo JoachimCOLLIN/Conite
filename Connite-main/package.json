@@ -2,14 +2,14 @@
   "dependencies": {
     "@angular/common": "^13.0.2",
     "@angular/core": "^13.0.2",
-    "@angular/material": "^13.1.1",
+    "@angular/material": "^13.1.2",
     "@angular/platform-browser": "^13.0.2",
     "@angular/router": "^13.0.2"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3"
   },
-  "scripts":{
-    "postinstall":"ngcc"
+  "scripts": {
+    "postinstall": "ngcc"
   }
 }

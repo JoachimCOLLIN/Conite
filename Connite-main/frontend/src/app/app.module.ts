@@ -5,6 +5,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
+
+
 
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -29,6 +33,7 @@ import {ListeOuvrierComponent} from './ouvriers/listeouvrier.component';
 import { OuvrierFormComponent } from './ouvriers/ouvrier-form.component';
 import { PointageApiService } from './pointage/pointage-api.serivce';
 import { PointageComponent } from './pointage/pointage.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const appRoutes: Routes = [
@@ -71,7 +76,9 @@ const appRoutes: Routes = [
       MatCardModule,
       MatInputModule,
       MatIconModule,
-      MatTableModule
+      MatTableModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
   ],
   
     providers: [
@@ -80,6 +87,7 @@ const appRoutes: Routes = [
         OuvriersApiService,
         InformationsApiService,
         PointageApiService,
+        DatePipe,
     ],
     bootstrap: [AppComponent]
 })
