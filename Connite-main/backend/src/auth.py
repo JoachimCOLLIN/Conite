@@ -54,14 +54,19 @@ def sign_up():
         print(a)
         session = get_session()
         user = session.query(RegistrationUser).filter_by(email=a).first()
-        print(1)
+        
+
         if user:
             #user already exists
-            return 204
+            print(3)
+            
+        elif requesting_user["password1"]!=requesting_user["password2"]:
+            print(4)
+            
+
         else:
-            new_user = RegistrationUser(email=requesting_user["email"], first_name=requesting_user["first_name"], family_name=requesting_user["family_name"], password1=generate_password_hash(
-                requesting_user["password1"], method='sha256'), password2=generate_password_hash(
-                requesting_user["password2"], method='sha256'),created_by='HTTP request')
+            print(2)
+            new_user = RegistrationUser(**requesting_user,created_by='HTTP request')
             session=get_session()
             session.add(new_user)
             session.commit()

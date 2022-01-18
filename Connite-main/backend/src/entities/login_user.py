@@ -8,7 +8,6 @@ from .base import Base
 
 class LoginUser(Entity, Base):
     __tablename__ = 'loginuser'
-    id= sqlalchemy.Column(sqlalchemy.String, primary_key=True)
     email = sqlalchemy.Column(sqlalchemy.String(150),unique=True)
     password = sqlalchemy.Column(sqlalchemy.String(150))
     isloggedin= sqlalchemy.Column(sqlalchemy.Boolean)

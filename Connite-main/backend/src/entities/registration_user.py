@@ -8,7 +8,6 @@ from .base import Base
 
 class RegistrationUser(Entity, Base):
     __tablename__ = 'registrationuser'
-    id= sqlalchemy.Column(sqlalchemy.String, primary_key=True)
     email = sqlalchemy.Column(sqlalchemy.String(150),unique=True)
     password1 = sqlalchemy.Column(sqlalchemy.String(150))
     password2 = sqlalchemy.Column(sqlalchemy.String(150))
