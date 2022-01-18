@@ -46,31 +46,25 @@ def logout():
 
 @blueprint.route('/register', methods=['GET', 'POST'])
 def sign_up():
-    print(1)
     if flask.request.method == 'POST':
-        
         requesting_user = RegistrationUserSchema(only=('email', 'first_name','family_name','password1','password2')).load(flask.request.get_json())
-        a=requesting_user["email"]
-        print(a)
-        session = get_session()
-        user = session.query(RegistrationUser).filter_by(email=a).first()
-        
-
-        if user:
-            #user already exists
-            print(3)
-            
-        elif requesting_user["password1"]!=requesting_user["password2"]:
-            print(4)
-            
-
+        if requesting_user["password1"]!=requesting_user["password2"]:
+            print("wrong password")
         else:
-            print(2)
-            new_user = RegistrationUser(**requesting_user,created_by='HTTP request')
-            session=get_session()
-            session.add(new_user)
-            session.commit()
-            session.select()
-            return flask.jsonify(new_user),201
+            session = get_session()
+            user = session.query(RegistrationUser).filter_by(email=requesting_user["email"]).first()
+            print(user)
+            if user:
+                print("already exist")
+                session.close()
+
+            else:
+                print("ok")
+                registration_user = RegistrationUser(**requesting_user,created_by='HTTP request')
+                session.add(registration_user)
+                session.commit()
+                new_user = RegistrationUserSchema().dump(registration_user)
+                session.close()
+                return flask.jsonify(new_user),201
 
     return 201
