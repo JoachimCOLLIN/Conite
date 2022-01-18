@@ -13,13 +13,13 @@ import { User } from './auth.model';
 <mat-form-field class="full-width">
 <input matInput
 placeholder="Adresse Email"
->
+(keyup)="updateEmail($event)">
 </mat-form-field>
 
 <mat-form-field class="full-width">
 <input type="password" matInput
 placeholder="Mot de passe"
->
+(keyup)="updatePassword($event)">
 </mat-form-field>
 
 <button mat-raised-button
@@ -44,19 +44,28 @@ width: 100%;
 
 
 export class LoginComponent {
-    user= new User('','' ,[''],false);
+    id:0;
     constructor(private authApi: AuthApiService, private router: Router)
     {}
-
+    updateEmail(event: any)
+    {
+        this.authApi.user.email = event.target.value;
+    }
+    updatePassword(event: any)
+    {
+        this.authApi.user.password = event.target.value;
+    }
+    
     login()
     {
         this.authApi
-            .login(this.user)
+            .login(this.authApi.user)
             .subscribe(
+                res => {this.id= res;},
+                
                 () => this.router.navigate(['/']),
-                error => alert(error.message)
             );
+        console.log(this.id)
 
-        sessionStorage.setItem('email', this.user.email);
     }
 }

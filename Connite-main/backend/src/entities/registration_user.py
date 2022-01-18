@@ -6,8 +6,8 @@ from .base import Base
 
 
 
-class User(Entity, Base):
-    __tablename__ = 'user'
+class RegistrationUser(Entity, Base):
+    __tablename__ = 'registrationuser'
     id= sqlalchemy.Column(sqlalchemy.String, primary_key=True)
     email = sqlalchemy.Column(sqlalchemy.String(150),unique=True)
     password1 = sqlalchemy.Column(sqlalchemy.String(150))
@@ -23,7 +23,7 @@ class User(Entity, Base):
         self.password1 = password1
         self.password2 = password2
 
-class UserSchema(marshmallow.Schema):
+class RegistrationUserSchema(marshmallow.Schema):
     id = marshmallow.fields.Number()
     email = marshmallow.fields.Str()
     password1 = marshmallow.fields.Str()

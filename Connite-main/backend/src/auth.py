@@ -5,10 +5,10 @@ import werkzeug.security
 
 from .db import get_session
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .entities.auth import User,UserSchema
+from .entities.registration_user import RegistrationUser,RegistrationUserSchema
+from .entities.login_user import LoginUser,LoginUserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
-from flask_login import login_user, login_required, logout_user, current_user
 
 blueprint = flask.Blueprint('auth', __name__)
 
@@ -17,28 +17,31 @@ blueprint = flask.Blueprint('auth', __name__)
 def login():
     print(1)
     if request.method == 'POST':
-        requesting_user = UserSchema(only=('email','password')).load(flask.request.get_json())
-        print(email)
+        requesting_user = flask.request.get_json()
+        print(requesting_user)
         session = get_session()
-        user = session.query(User).filter_by(email=email).first()
+        user = session.query(LoginUser).filter_by(email=requesting_user["email"]).first()
+        print(user)
         if user:
-            if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
-                login_user(user, remember=True)
-                return flask.jsonify()
+            if check_password_hash(user, requesting_user["password"]):
+                requesting_user["isloggedIn"]=True
+                return flask.jsonify(requesting_user)
             else:
-                flash('Incorrect password, try again.', category='error')
+            #password is not corrected
+                return 203
         else:
-            flash('Email does not exist.', category='error')
-    
-    return flask.jsonify(ouvriers),201
+            # user doesn't exists
+            return 202
+    return 201
 
 
-@blueprint.route('/logout')
+
+@blueprint.route('/logout',methods=['GET','POST'])
 #@login_required
 def logout():
-    logout_user()
-    return redirect(url_for('auth.login'))
+    requesting_user = flask.request.get_json()
+    requesting_user["isloggedIn"]=False
+    return flask.jsonify(requesting_user)
 
 
 @blueprint.route('/register', methods=['GET', 'POST'])
@@ -46,32 +49,23 @@ def sign_up():
     print(1)
     if flask.request.method == 'POST':
         
-        requesting_user = UserSchema(only=('email', 'first_name','family_name','password1','password2')).load(flask.request.get_json())
-        a=requesting_user["email"][0]
+        requesting_user = RegistrationUserSchema(only=('email', 'first_name','family_name','password1','password2')).load(flask.request.get_json())
+        a=requesting_user["email"]
         print(a)
         session = get_session()
-        user = session.query(User).filter_by(email=a).first()
+        user = session.query(RegistrationUser).filter_by(email=a).first()
         print(1)
         if user:
-            flash('Email already exists.', category='error')
-            print(1)
-        elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
-        elif len(first_name) < 2:
-            flash('First name must be greater than 1 character.', category='error')
-        elif password1 != password2:
-            flash('Passwords don\'t match.', category='error')
-        elif len(password1) < 7:
-            flash('Password must be at least 7 characters.', category='error')
+            #user already exists
+            return 204
         else:
-            new_user = User(email=requesting_user["email"], first_name=requesting_user["first_name"], family_name=requesting_user["family_name"], password1=generate_password_hash(
+            new_user = RegistrationUser(email=requesting_user["email"], first_name=requesting_user["first_name"], family_name=requesting_user["family_name"], password1=generate_password_hash(
                 requesting_user["password1"], method='sha256'), password2=generate_password_hash(
-                requesting_user["password2"], method='sha256'))
+                requesting_user["password2"], method='sha256'),created_by='HTTP request')
             session=get_session()
             session.add(new_user)
             session.commit()
-            login_user(new_user, remember=True)
-            flash('Account created!', category='success')
+            session.select()
             return flask.jsonify(new_user),201
 
     return 201

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
 import {Ouvrier} from '../ouvriers/ouvrier.model';
-
+import { PointageOuvrier } from './pointage.model';
 
 @Injectable()
 export class PointageApiService
@@ -23,6 +23,11 @@ export class PointageApiService
         return this.http
             .get<Ouvrier[]>(`${API_URL}/ouvriers`)
             .pipe(catchError(PointageApiService.handleError));
+    }
+    updatePointage(pointageouvrier: PointageOuvrier): Observable<any> {
+        
+        return this.http
+          .post(`${API_URL}/pointageouvrier_update`, pointageouvrier);
     }
 
 

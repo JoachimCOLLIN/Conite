@@ -6,6 +6,8 @@ import { Ouvrier } from '../ouvriers/ouvrier.model';
 import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
+import { PointageOuvrier } from './pointage.model';
+import { PointageApiService } from './pointage-api.serivce';
 
 
 
@@ -41,6 +43,12 @@ import { DatePipe } from '@angular/common';
     </ng-container>
     <ng-container matColumnDef="heures">
     <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Heures </th>
+    
+    <td mat-cell *matCellDef="let row" >
+    </td>
+    </ng-container>
+    <ng-container matColumnDef="Galerie">
+    <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Galerie </th>
     <td mat-cell *matCellDef="let row" >
     </td>
   </ng-container>
@@ -111,23 +119,43 @@ export class PointageComponent implements OnInit {
     id = 0;
     ouvriersListSubs: Subscription;
     ouvrier : Ouvrier[];
-    displayedColumns: string[] = ['nom', 'prenom', 'age','qualification','heures','primes','date'];
+    displayedColumns: string[] = ['nom', 'prenom', 'age','qualification','heures','Galerie','primes','date'];
     myDate : Date;
     todayDate : String;
+    pointageouvrier= new PointageOuvrier(0,0,new Date(),0,0,false,false)
   
 
 
     constructor(
       private route: ActivatedRoute,
       private ouvriersApi: OuvriersApiService,
+      private pointageApi: PointageApiService,
       private datepipe : DatePipe,
+      private router : Router,
     ) { 
       this.todayDate =this.datepipe.transform((new Date), 'MM/dd/yyyy');       }
 
     updateDate(event: any)
     {
-        console.log(event.target.value)
+        this.pointageouvrier.date=event.target.value
     }
+    updateHeures(event: any)
+    {
+        this.pointageouvrier.heures=event.target.value
+    }
+    updateGaleriesHeures(event: any)
+    {
+        this.pointageouvrier.galerie_heures=event.target.value
+    }
+
+    updatePointage(pointageouvrier : PointageOuvrier)
+    {   
+        this.pointageApi
+            .updatePointage(this.pointageouvrier)
+            .subscribe(
+                () => this.router.navigate([]),
+                error => alert(error.message)
+            );}
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {

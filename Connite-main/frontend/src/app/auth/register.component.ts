@@ -60,44 +60,38 @@ width: 100%;
 
 
 export class RegisterComponent {
-    authentication = {
-        email: '',
-        first_name:'',
-        family_name: '',
-        password1: '',
-        password2:'',
-    };
+    
 
     constructor(private authApi: AuthApiService, private router: Router)
     {}
 
     updateEmail(event: any)
     {
-        this.authentication.email = event.target.value;
+        this.authApi.auth.email = event.target.value;
     }
 
     updatePassword1(event: any)
     {
-        this.authentication.password1 = event.target.value;
+        this.authApi.auth.password1 = event.target.value;
     }
     updatePassword2(event: any)
     {
-        this.authentication.password2 = event.target.value;
+        this.authApi.auth.password2 = event.target.value;
     }
     updateFirst_name(event: any)
     {
-        this.authentication.first_name = event.target.value;
+        this.authApi.auth.first_name = event.target.value;
     }
     updateFamily_name(event: any)
     {
-        this.authentication.family_name = event.target.value;
+        this.authApi.auth.family_name = event.target.value;
     }
    
 
     register()
     {
         this.authApi
-            .register(this.authentication)
+            .register(this.authApi.auth)
             .subscribe(
                 () => this.router.navigate(['/login']),
                 error => alert(error.message)

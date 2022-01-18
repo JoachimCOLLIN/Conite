@@ -13,6 +13,7 @@ class Ouvrier(Entity, Base):
     age = sqlalchemy.Column(sqlalchemy.Integer)
     qualification = sqlalchemy.Column(sqlalchemy.String)
     
+    
 
     def __init__(self,id_chantier,nom,prenom,age,qualification,created_by):
         Entity.__init__(self,created_by)
@@ -21,6 +22,7 @@ class Ouvrier(Entity, Base):
         self.prenom = prenom
         self.age = age
         self.qualification = qualification
+        
 
 
 

@@ -6,7 +6,7 @@ import {Chantier} from '../chantiers/chantier.model';
 import {ChantiersApiService} from '../chantiers/chantiers-api.service';
 import { Ouvrier } from './ouvrier.model';
 import { OuvriersApiService } from './ouvriers-api.service';
-
+import { AuthApiService } from '../auth/auth-api.service';
 
 
 @Component({
@@ -98,6 +98,7 @@ export class ListeOuvrierComponent implements OnInit {
 
 
     constructor(
+      private authApi: AuthApiService,
       private route: ActivatedRoute,
       private ouvriersApi: OuvriersApiService,
     ) {}

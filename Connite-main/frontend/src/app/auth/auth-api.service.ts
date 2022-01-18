@@ -5,10 +5,13 @@ import { throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
 import {Auth,User} from './auth.model';
+import * as Auth0 from 'auth0-web';
 
 @Injectable()
 export class AuthApiService
-{
+{   
+    user =new User('','',false)
+    auth= new Auth('','','','','')
     constructor(private http: HttpClient)
     {}
 
