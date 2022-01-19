@@ -35,6 +35,7 @@ def logout():
     return flask.jsonify(requesting_user)
 
 
+
 @blueprint.route('/register', methods=['GET', 'POST'])
 def sign_up():
     if flask.request.method == 'POST':
