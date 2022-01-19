@@ -7,7 +7,7 @@ import {ChantiersApiService} from './chantiers/chantiers-api.service';
 import {Chantier} from './chantiers/chantier.model';
 import {Subscription} from 'rxjs/Subscription';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { AuthApiService } from './auth/auth-api.service';
 
 @Component({
   selector: 'app-root',
@@ -34,16 +34,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient,private authApi: AuthApiService){}
+  
   private static _handleError(err: HttpErrorResponse | any)
   {
       return Observable.throw(err.message || 'Error: Unable to complete request.');
   }
 
-  authenticated = false;
+  authentificated= this.authApi.user.isloggedIn;
   title = "frontend";
-  signOut = false;
+
 
   about()
   {
@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit()
   {
+    console.log(this.authentificated)
       const self = this;
   }
 }

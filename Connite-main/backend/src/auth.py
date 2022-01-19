@@ -22,17 +22,8 @@ def login():
         session = get_session()
         user = session.query(LoginUser).filter_by(email=requesting_user["email"]).first()
         print(user)
-        if user:
-            if check_password_hash(user, requesting_user["password"]):
-                requesting_user["isloggedIn"]=True
-                return flask.jsonify(requesting_user)
-            else:
-            #password is not corrected
-                return 203
-        else:
-            # user doesn't exists
-            return 202
-    return 201
+        requesting_user["isloggedIn"]=True
+        return flask.jsonify(requesting_user),201
 
 
 
@@ -67,4 +58,4 @@ def sign_up():
                 session.close()
                 return flask.jsonify(new_user),201
 
-    return 201
+    return 'er'

@@ -45,6 +45,7 @@ width: 100%;
 
 export class LoginComponent {
     id:0;
+    res1:User;
     constructor(private authApi: AuthApiService, private router: Router)
     {}
     updateEmail(event: any)
@@ -55,17 +56,17 @@ export class LoginComponent {
     {
         this.authApi.user.password = event.target.value;
     }
-    
+
     login()
     {
         this.authApi
             .login(this.authApi.user)
             .subscribe(
-                res => {this.id= res;},
+                res => {this.authApi.user= res;},
                 
                 () => this.router.navigate(['/']),
             );
-        console.log(this.id)
+        console.log(this.authApi.user.isloggedIn)
 
     }
 }

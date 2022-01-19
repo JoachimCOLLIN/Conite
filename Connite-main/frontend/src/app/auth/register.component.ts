@@ -61,7 +61,7 @@ width: 100%;
 
 export class RegisterComponent {
     
-
+    
     constructor(private authApi: AuthApiService, private router: Router)
     {}
 
