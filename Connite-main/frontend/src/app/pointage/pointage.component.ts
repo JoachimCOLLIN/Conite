@@ -42,7 +42,7 @@ import { PrimesComponent } from '../primes/primes.component';
     <ng-container matColumnDef="heures">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Heures </th>
       <td mat-cell *matCellDef="let row" > 
-        <mat-form-field appearance="outline" [style.width.px]=40>
+        <mat-form-field appearance="legacy" [style.width.px]=18 >
           <mat-label></mat-label>
           <input matInput [(ngModel)]="name">
         </mat-form-field>
@@ -52,7 +52,7 @@ import { PrimesComponent } from '../primes/primes.component';
     <ng-container matColumnDef="Galerie">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Galerie </th>
       <td mat-cell *matCellDef="let row" >
-        <mat-form-field  appearance="outline" [style.width.px]=40>
+        <mat-form-field  appearance="legacy" [style.width.px]=18 >
           <mat-label></mat-label>
           <input matInput [(ngModel)]="name">
         </mat-form-field>
@@ -81,7 +81,7 @@ import { PrimesComponent } from '../primes/primes.component';
     <ng-container matColumnDef="bouton">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Valider </th>
       <td mat-cell *matCellDef="let row" >
-        <button mat-raised-button color="primary" class="validation_button"><mat-icon>check</mat-icon></button>
+        <button mat-mini-fab color="primary" ><mat-icon>check</mat-icon></button>
       </td>
     </ng-container>
 
@@ -118,15 +118,12 @@ import { PrimesComponent } from '../primes/primes.component';
       width:15px !important;
       font-size:15px !important;
   }
-    .validation_button{
-      width: 50px!important;
-      min-width: unset!important;
-    }
 
     .prime_button{
       width: 50px!important;
 
     }
+
 
 `]
 })

@@ -14,5 +14,10 @@ export class PrimesComponent implements OnInit {
   }
 
 
+  onSubmit(){
+
+  }
+
+
 
 }
