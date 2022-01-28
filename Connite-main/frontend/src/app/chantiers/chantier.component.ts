@@ -11,10 +11,10 @@ import { Chantier } from './chantier.model';
     <div class ="mon_chantier">Mon Chantier: {{chantier.title}}</div>
     <div>
         <section>                                     
-            <button mat-raised-button color="Basic1" class ="big_button" [routerLink] = "['/listedesouvriers',chantier.id]">Liste des ouvriers</button> 
-            <button mat-raised-button color="Basic2" class ="big_button" [routerLink] = "['/pointage',chantier.id]">Pointage</button>
-            <button mat-raised-button color="Basic3" class ="big_button">Fiches de paie</button> 
-            <button mat-raised-button color="Basic4" class ="big_button">Statistiques</button> 
+            <button mat-raised-button color="B1" class ="big_button" [routerLink] = "['/listedesouvriers',chantier.id]">Liste des ouvriers</button> 
+            <button mat-raised-button color="B2" class ="big_button" [routerLink] = "['/pointage',chantier.id]">Pointage</button>
+            <button mat-raised-button color="B3" class ="big_button">Fiches de paie</button> 
+            <button mat-raised-button color="B4" class ="big_button">Statistiques</button> 
         </section> 
     </div>
 `,
@@ -31,19 +31,19 @@ import { Chantier } from './chantier.model';
         margin : 3vh;
         font-weight : bold;
     }
-    .mat-Basic1 {
+    .mat-B1 {
         background-color: green;
         color: #fff;
     }
-    .mat-Basic2 {
+    .mat-B2 {
         background-color: red;
         color: #fff;
     }
-    .mat-Basic3 {
+    .mat-B3 {
         background-color: blue;
         color: #fff;
     }
-    .mat-Basic4 {
+    .mat-B4 {
         background-color: brown;
         color: #fff;
     }

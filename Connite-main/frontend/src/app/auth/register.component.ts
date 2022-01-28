@@ -7,42 +7,43 @@ import {Router} from "@angular/router";
     selector: 'register-form',
     template: `
 <mat-card>
-<h2>Inscription</h2>
-<mat-form-field class="full-width">
-<input matInput
-placeholder="Adresse Email"
-(keyup)="updateEmail($event)">
-</mat-form-field>
+    <h2>Inscription</h2>
 
-<mat-form-field class="full-width">
-<input matInput
-placeholder="Prénom"
-(keyup)="updateFirst_name($event)">
-</mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput
+            placeholder="Adresse Email"
+            (keyup)="updateEmail($event)">
+    </mat-form-field>
 
-<mat-form-field class="full-width">
-<input matInput
-placeholder="Nom"
-(keyup)="updateFamily_name($event)">
-</mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput
+        placeholder="Prénom"
+        (keyup)="updateFirst_name($event)">
+    </mat-form-field>
 
-<mat-form-field class="full-width">
-<input matInput
-placeholder="Mot de passe"
-(keyup)="updatePassword1($event)">
-</mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput
+        placeholder="Nom"
+        (keyup)="updateFamily_name($event)">
+    </mat-form-field>
 
-<mat-form-field class="full-width">
-<input matInput
-placeholder="Confirmer Mot de Passe"
-(keyup)="updatePassword2($event)">
-</mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput
+        placeholder="Mot de passe"
+        (keyup)="updatePassword1($event)">
+    </mat-form-field>
 
-<button mat-raised-button
-color="primary"
-(click)="register()">
-Inscription
-</button>
+    <mat-form-field class="full-width">
+        <input matInput
+        placeholder="Confirmer Mot de Passe"
+        (keyup)="updatePassword2($event)">
+    </mat-form-field>
+
+    <button mat-raised-button
+        color="primary"
+        (click)="register()">
+        Inscription
+    </button>
 </mat-card>
 `,
     styles: [`

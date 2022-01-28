@@ -13,17 +13,16 @@ export class OuvriersApiService
     constructor(private http: HttpClient)
     {}
 
-    private static handleError(err: HttpErrorResponse | any)
-    {
-        return Observable.throw(err.message || 'Error: Unable to complete request.');
-    }
+    // private static handleError(err: HttpErrorResponse | any)
+    // {
+    //     return Observable.throw(err.message || 'Error: Unable to complete request.');
+    // }
 
-    // GET list of public, future events
     getOuvriers(chantierId: number)
     {
         return this.http
             .get<Ouvrier[]>(`${API_URL}/ouvriers_chantier/${chantierId}`)
-            .pipe(catchError(OuvriersApiService.handleError));
+            // .pipe(catchError(OuvriersApiService.handleError));
     }
 
     saveOuvrier(ouvrier: Ouvrier): Observable<any> {
@@ -32,12 +31,6 @@ export class OuvriersApiService
           .post(`${API_URL}/ouvriers_add`, ouvrier);
     }
 
-    saveOuvrierId(ouvrier: Ouvrier, id : number): Observable<any> {
-      
-      return this.http
-        .post(`${API_URL}/ouvriers/${id}`, ouvrier);
-  }
-    
 
     deleteOuvrier(chantierId: number,ouvrierId: number)
     {

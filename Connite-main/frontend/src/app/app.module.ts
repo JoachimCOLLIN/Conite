@@ -8,8 +8,6 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 
-
-
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
@@ -34,6 +32,9 @@ import { OuvrierFormComponent } from './ouvriers/ouvrier-form.component';
 import { PointageApiService } from './pointage/pointage-api.serivce';
 import { PointageComponent } from './pointage/pointage.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PrimesComponent } from './primes/primes.component';
+import { PrimesService } from './primes/primes-api.service';
 
 
 const appRoutes: Routes = [
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
     {path: 'chantier/:id',component : ChantierComponent},
     {path: 'listedesouvriers/:id', component: ListeOuvrierComponent},
     {path: 'new-ouvrier/:id', component : OuvrierFormComponent},
-    {path: 'pointage/:id', component: PointageComponent,}
+    {path: 'pointage/:id', component: PointageComponent}
 ];
 
 
@@ -65,6 +66,8 @@ const appRoutes: Routes = [
       ListeOuvrierComponent,
       OuvrierFormComponent,
       PointageComponent,
+      PrimesComponent,
+      
   ],
   imports: [
       BrowserModule,
@@ -79,6 +82,7 @@ const appRoutes: Routes = [
       MatTableModule,
       MatDatepickerModule,
       MatNativeDateModule,
+      MatDialogModule,
   ],
   
     providers: [
@@ -88,6 +92,7 @@ const appRoutes: Routes = [
         InformationsApiService,
         PointageApiService,
         DatePipe,
+        PrimesService,
     ],
     bootstrap: [AppComponent]
 })

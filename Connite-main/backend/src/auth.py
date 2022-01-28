@@ -20,9 +20,10 @@ def login():
         requesting_user = flask.request.get_json()
         print(requesting_user)
         session = get_session()
-        user = session.query(LoginUser).filter_by(email=requesting_user["email"]).first()
+        user = session.query(RegistrationUser).filter_by(email=requesting_user["email"]).first()
         print(user)
         requesting_user["isloggedIn"]=True
+        print(requesting_user)
         return flask.jsonify(requesting_user),201
 
 

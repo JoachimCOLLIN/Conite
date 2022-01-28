@@ -8,6 +8,7 @@ import {ChantiersApiService} from './chantiers-api.service';
   selector: 'chantiers',
   template: `
     <h2>Mes Chantiers</h2>
+
     <div class="chantiers">
       <mat-card class="example-card" *ngFor="let chantier of chantiersList" class="mat-elevation-z5">
         <mat-card-content>
@@ -16,14 +17,13 @@ import {ChantiersApiService} from './chantiers-api.service';
           </button>
           <mat-card-title>{{chantier.title}}</mat-card-title>
           <mat-card-subtitle>{{chantier.description}}</mat-card-subtitle>
-          <p></p>
           <button mat-raised-button color="accent" [routerLink] = "['chantier',chantier.id]" >Accès</button>
-          <button mat-button color="warn" *ngIf="isAdmin()" (click)="delete(chantier.id)">Supprimer</button>
+          <button mat-button color="warn" (click)="delete(chantier.id)">Supprimer</button>
           </mat-card-content>
       </mat-card>
     </div>
-    <button mat-fab color="primary" *ngIf="!authenticated"
-            class="new-chantier" routerLink="/new-chantier">
+    
+    <button mat-fab color="primary" class="new-chantier" routerLink="/new-chantier">
       <i class="material-icons">note_add</i>
     </button>
     
@@ -35,7 +35,6 @@ export class ChantiersComponent implements OnInit, OnDestroy
 {
     chantiersListSubs: Subscription;
     chantiersList: Chantier[];
-    authenticated = false;
 
     constructor(private chantiersApi: ChantiersApiService)
     {}
@@ -63,8 +62,5 @@ export class ChantiersComponent implements OnInit, OnDestroy
                     res => {this.chantiersList = res;}, console.error)}, console.error); 
                   }
 
-    isAdmin()
-    {
-        return true;
-    }
+
 }

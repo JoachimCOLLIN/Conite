@@ -8,6 +8,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { PointageOuvrier } from './pointage.model';
 import { PointageApiService } from './pointage-api.serivce';
+import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
+import { PrimesComponent } from '../primes/primes.component';
 
 
 
@@ -16,66 +18,73 @@ import { PointageApiService } from './pointage-api.serivce';
     template: `
     <table mat-table [dataSource]="ouvrier" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  >
 
-
-    <!-- Position Column -->
-    <!-- Name Column -->
     <ng-container matColumnDef="nom">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Nom </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.nom}} </td>
     </ng-container>
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="prenom">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Prenom </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.prenom}} </td>
     </ng-container>
+
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Age </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.age}} </td>
     </ng-container>
-    <!-- Symbol Column -->
+
     <ng-container matColumnDef="qualification">
       <th mat-header-cell *matHeaderCellDef style="text-align:left"> Qualification </th>
       <td mat-cell *matCellDef="let element" style="text-align:left"> {{element.qualification}} </td>
     </ng-container>
+
     <ng-container matColumnDef="heures">
-    <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Heures </th>
-    
-    <td mat-cell *matCellDef="let row" >
-    </td>
+      <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Heures </th>
+      <td mat-cell *matCellDef="let row" > 
+        <mat-form-field appearance="outline" [style.width.px]=40>
+          <mat-label></mat-label>
+          <input matInput [(ngModel)]="name">
+        </mat-form-field>
+      </td>
     </ng-container>
+
     <ng-container matColumnDef="Galerie">
-    <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Galerie </th>
-    <td mat-cell *matCellDef="let row" >
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="primes">
-  <th mat-header-cell  *matHeaderCellDef style="text-align:left"> Primes </th>
-  <td mat-cell *matCellDef="let row" >
-  </td>
-</ng-container>
+      <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Galerie </th>
+      <td mat-cell *matCellDef="let row" >
+        <mat-form-field  appearance="outline" [style.width.px]=40>
+          <mat-label></mat-label>
+          <input matInput [(ngModel)]="name">
+        </mat-form-field>
+      </td>
+    </ng-container>
 
-<ng-container matColumnDef="date">
-<th mat-header-cell *matHeaderCellDef></th>
-<td mat-cell *matCellDef="let element">    
+    <ng-container matColumnDef="primes">
+      <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Primes </th>
+      <td mat-cell *matCellDef="let row" >
+        <button mat-raised-button (click)="openDialog()" class="prime_button"><mat-icon>work</mat-icon></button>
+      </td>
+    </ng-container>
 
-<mat-form-field [style.width.px]=100 floatlabel = "always">
-<mat-label>{{todayDate}}</mat-label>
-  <input matInput [matDatepicker] = "myDatePicker" (keyup)="updateDate($event)">
-  <mat-datepicker-toggle [for] = "myDatePicker" matSuffix></mat-datepicker-toggle>
-  <mat-datepicker #myDatePicker ></mat-datepicker>
-</mat-form-field>
-</td>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef  style="text-align:center">Date</th>
+      <td mat-cell *matCellDef="let element">    
+        <mat-form-field [style.width.px]=100 floatlabel = "always">
+          <mat-label>{{todayDate}}</mat-label>
+          <input matInput [matDatepicker] = "myDatePicker" (keyup)="updateDate($event)">
+          <mat-datepicker-toggle [for] = "myDatePicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #myDatePicker ></mat-datepicker>
+        </mat-form-field>
+      </td>
+    </ng-container>
 
-</ng-container>
+    <ng-container matColumnDef="bouton">
+      <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Valider </th>
+      <td mat-cell *matCellDef="let row" >
+        <button mat-raised-button color="primary" class="validation_button"><mat-icon>check</mat-icon></button>
+      </td>
+    </ng-container>
 
-
-
-
-  
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
    </table>
@@ -94,11 +103,6 @@ import { PointageApiService } from './pointage-api.serivce';
       right: 15px;
     }
     
-    button.material-icons{
-      position : absolute;
-      right : 3px;
-      top : 3px;
-    }
     
     .mat-column-date {
       white-space: unset !important;
@@ -109,6 +113,20 @@ import { PointageApiService } from './pointage-api.serivce';
       width = 100 px;
     }
 
+    .mat-icon{
+      height:15px !important;
+      width:15px !important;
+      font-size:15px !important;
+  }
+    .validation_button{
+      width: 50px!important;
+      min-width: unset!important;
+    }
+
+    .prime_button{
+      width: 50px!important;
+
+    }
 
 `]
 })
@@ -119,7 +137,7 @@ export class PointageComponent implements OnInit {
     id = 0;
     ouvriersListSubs: Subscription;
     ouvrier : Ouvrier[];
-    displayedColumns: string[] = ['nom', 'prenom', 'age','qualification','heures','Galerie','primes','date'];
+    displayedColumns: string[] = ['nom', 'prenom', 'age','qualification','heures','Galerie','primes','date', 'bouton'];
     myDate : Date;
     todayDate : String;
     pointageouvrier= new PointageOuvrier(0,0,new Date(),0,0,false,false)
@@ -132,6 +150,7 @@ export class PointageComponent implements OnInit {
       private pointageApi: PointageApiService,
       private datepipe : DatePipe,
       private router : Router,
+      public dialog: MatDialog,
     ) { 
       this.todayDate =this.datepipe.transform((new Date), 'MM/dd/yyyy');       }
 
@@ -156,6 +175,15 @@ export class PointageComponent implements OnInit {
                 () => this.router.navigate([]),
                 error => alert(error.message)
             );}
+
+    openDialog() {
+      // this.pointageApi.initializerFormGroup();
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "60%";
+      this.dialog.open(PrimesComponent,dialogConfig);
+    }
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {

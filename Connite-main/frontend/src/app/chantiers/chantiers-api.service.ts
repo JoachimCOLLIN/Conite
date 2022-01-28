@@ -12,46 +12,31 @@ export class ChantiersApiService
     constructor(private http: HttpClient)
     {}
 
-    private static handleError(err: HttpErrorResponse | any)
-    {
-        return Observable.throw(err.message || 'Error: Unable to complete request.');
-    }
+    // private static handleError(err: HttpErrorResponse | any)
+    // {
+    //     return Observable.throw(err.message || 'Error: Unable to complete request.');
+    // }
 
-    // GET list of public, future events
     getChantiers()
     {
         return this.http
             .get<Chantier[]>(`${API_URL}/chantiers`)
-            .pipe(catchError(ChantiersApiService.handleError));
+            // .pipe(catchError(ChantiersApiService.handleError));
     }
 
     getChantier(id_chantier:number)
     {
         return this.http
             .get<Chantier>(`${API_URL}/chantier/${id_chantier}`)
-            .pipe(catchError(ChantiersApiService.handleError));
+            // .pipe(catchError(ChantiersApiService.handleError));
     }
 
     saveChantier(chantier: Chantier): Observable<any> {
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Authorization': `Bearer ${Auth0.getAccessToken()}`
-          })
-        };
+
         return this.http
-          .post(`${API_URL}/chantiers`, chantier, httpOptions);
+          .post(`${API_URL}/chantiers`, chantier);
     }
 
-    saveChantierId(chantier: Chantier, id : number): Observable<any> {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': `Bearer ${Auth0.getAccessToken()}`
-        })
-      };
-      return this.http
-        .post(`${API_URL}/chantiers/${id}`, chantier, httpOptions);
-  }
-    
 
     deleteChantier(chantierId: number)
     {

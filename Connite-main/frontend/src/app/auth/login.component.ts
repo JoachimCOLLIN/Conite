@@ -64,7 +64,7 @@ export class LoginComponent {
             .subscribe(
                 res => {this.authApi.user= res;},
                 
-                () => this.router.navigate(['/']),
+                () => this.router.navigate(['/about']),
             );
         console.log(this.authApi.user.isloggedIn)
 

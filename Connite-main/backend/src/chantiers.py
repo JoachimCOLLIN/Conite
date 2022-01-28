@@ -26,7 +26,6 @@ def get_chantiers():
 @blueprint.route('/chantier/<id_chantier>',methods=['Get'])
 def get_chantier(id_chantier):
 
-    # TODO ensure the chantier_id gives an existing chantier
     db = get_session()
     chantier = db.query(Chantier).filter_by(id=id_chantier).first()
     db.close()
@@ -38,7 +37,6 @@ def get_chantier(id_chantier):
 
 @blueprint.route('/infos/<chantier_id>',methods=['POST'])
 def update_chantier(chantier_id):
-    print(1)
     posted_chantier =flask.request.get_json()
 
     db = get_session()
@@ -54,26 +52,22 @@ def update_chantier(chantier_id):
     return flask.jsonify(new_chantier), 201
 
 @blueprint.route('/chantiers', methods=['POST'])
-#@requires_auth
 def add_chantier():
     posted_chantier = ChantierSchema(
         only=('title', 'description','localisation','datedelancement','moderateurs')).load(flask.request.get_json())
 
     chantier = Chantier(**posted_chantier, created_by="HTTP post request")
 
-    # persist chantier
     session = get_session()
     session.add(chantier)
     session.commit()
 
-    # return created chantier
     new_chantier = ChantierSchema().dump(chantier)
     session.close()
     return flask.jsonify(new_chantier), 201
 
 
 @blueprint.route('/chantiers/<chantier_id>', methods=['DELETE'])
-#@requires_admin
 def delete_chantier(chantier_id):
     db = get_session()
     chantier = db.query(Chantier).filter_by(id=chantier_id).first()

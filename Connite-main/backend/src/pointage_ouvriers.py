@@ -23,14 +23,13 @@ def get_pointageOuvrier(chantier_id):
 
 
 @blueprint.route('/pointageouvrier_update', methods=['POST'])
-#@requires_auth
 def update_horaire():
     # mount exam object
     posted_pointage_ouvrier_jour = PointageOuvrierJourSchema(
         only=('id_chantier','id_ouvrier','date','heures','galeries')).load(flask.request.get_json())
 
     pointage_ouvrier_jour = PointageOuvrierJour(**posted_pointage_ouvrier_jour, created_by="HTTP post request")
-    """Il est nécessaire de checkeer si il s'agit d'un update des horaires travaillées ou des nouvelles 
+    """Il est nécessaire de checker si il s'agit d'un update des horaires travaillées ou des nouvelles 
     horaires rentrés par le chef d'équipe"""
     # persist exam
     session = get_session()

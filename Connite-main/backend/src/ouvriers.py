@@ -10,7 +10,6 @@ blueprint = flask.Blueprint('ouvriers', __name__)
 def get_ouvriers(chantier_id):
     # fetching from the database
     session = get_session()
-    print(int(chantier_id))
     ouvrier_objects = session.query(Ouvrier).filter(Ouvrier.id_chantier >= int(chantier_id)).filter(Ouvrier.id_chantier < int(chantier_id)+1).all()
 
     # transforming into JSON-serializable objects
@@ -23,7 +22,6 @@ def get_ouvriers(chantier_id):
 
 
 @blueprint.route('/ouvriers_add', methods=['POST'])
-#@requires_auth
 def add_ouvrier():
     # mount exam object
     posted_ouvrier = OuvrierSchema(
@@ -43,18 +41,8 @@ def add_ouvrier():
     return flask.jsonify(new_ouvrier), 201
 
 
-# @blueprint.route('/ouvriers/<ouvrier_id>', methods=['DELETE'])
-# #@requires_admin
-# def delete_ouvrier(ouvrier_id):
-#     db = get_session()
-#     ouvrier = db.query(Ouvrier).filter_by(id=ouvrier_id).first()
-#     db.delete(ouvrier)
-#     db.commit()
-#     db.close()
-#     return '', 201
 
 @blueprint.route('/ouvriers_delete/<ouvrier_id>/<chantier_id>', methods=['DELETE'])
-#@requires_admin
 def delete_ouvrier(ouvrier_id,chantier_id):
     db = get_session()
     ouvrier = db.query(Ouvrier).filter_by(id=ouvrier_id).first()

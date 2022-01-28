@@ -116,8 +116,8 @@ export class InformationsComponent implements OnInit {
       this.route.queryParams.subscribe(params => {
         this.id = +this.route.snapshot.paramMap.get('id')
       this.chantiersListSubs = this.infosApi
-          .getChantiers()
-          .subscribe(res => {this.chantier = res[this.id-1];}, console.error);
+          .getChantier(this.id)
+          .subscribe(res => {this.chantier = res;}, console.error);
       console.log(this.chantiersListSubs)
       const self = this; 
 
