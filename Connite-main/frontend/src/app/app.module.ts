@@ -7,6 +7,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -34,7 +36,7 @@ import { PointageComponent } from './pointage/pointage.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PrimesComponent } from './primes/primes.component';
-import { PrimesService } from './primes/primes-api.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 const appRoutes: Routes = [
@@ -83,6 +85,9 @@ const appRoutes: Routes = [
       MatDatepickerModule,
       MatNativeDateModule,
       MatDialogModule,
+      FormsModule,
+      MatCheckboxModule,
+
   ],
   
     providers: [
@@ -92,7 +97,6 @@ const appRoutes: Routes = [
         InformationsApiService,
         PointageApiService,
         DatePipe,
-        PrimesService,
     ],
     bootstrap: [AppComponent]
 })
@@ -100,3 +104,4 @@ export class AppModule {
     constructor() {
       }
  }
+

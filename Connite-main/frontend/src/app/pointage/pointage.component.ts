@@ -8,8 +8,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { PointageOuvrier } from './pointage.model';
 import { PointageApiService } from './pointage-api.serivce';
-import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogModule, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import { PrimesComponent } from '../primes/primes.component';
+import * as internal from 'events';
 
 
 
@@ -44,7 +45,7 @@ import { PrimesComponent } from '../primes/primes.component';
       <td mat-cell *matCellDef="let row" > 
         <mat-form-field appearance="legacy" [style.width.px]=18 >
           <mat-label></mat-label>
-          <input matInput [(ngModel)]="name">
+          <input matInput [(ngModel)]="Heures">
         </mat-form-field>
       </td>
     </ng-container>
@@ -54,15 +55,17 @@ import { PrimesComponent } from '../primes/primes.component';
       <td mat-cell *matCellDef="let row" >
         <mat-form-field  appearance="legacy" [style.width.px]=18 >
           <mat-label></mat-label>
-          <input matInput [(ngModel)]="name">
+          <input matInput [(ngModel)]="Galerie">
         </mat-form-field>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="primes">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Primes </th>
-      <td mat-cell *matCellDef="let row" >
-        <button mat-raised-button (click)="openDialog()" class="prime_button"><mat-icon>work</mat-icon></button>
+      <td mat-cell *matCellDef="let element">
+
+        <button mat-raised-button (click)="openDialog(element.id, element.nom)" class="prime_button"><mat-icon>work</mat-icon></button>
+
       </td>
     </ng-container>
 
@@ -71,7 +74,7 @@ import { PrimesComponent } from '../primes/primes.component';
       <td mat-cell *matCellDef="let element">    
         <mat-form-field [style.width.px]=100 floatlabel = "always">
           <mat-label>{{todayDate}}</mat-label>
-          <input matInput [matDatepicker] = "myDatePicker" (keyup)="updateDate($event)">
+          <input matInput [matDatepicker] = "myDatePicker" (keyup)="updateDate($event)" [(ngModel)]="date">
           <mat-datepicker-toggle [for] = "myDatePicker" matSuffix></mat-datepicker-toggle>
           <mat-datepicker #myDatePicker ></mat-datepicker>
         </mat-form-field>
@@ -80,14 +83,17 @@ import { PrimesComponent } from '../primes/primes.component';
 
     <ng-container matColumnDef="bouton">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Valider </th>
-      <td mat-cell *matCellDef="let row" >
-        <button mat-mini-fab color="primary" ><mat-icon>check</mat-icon></button>
+      <td mat-cell *matCellDef="let element" >
+        <button mat-mini-fab color="primary" (click) = "updateId_ouvrier(element.id)"><mat-icon>check</mat-icon></button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
    </table>
+
+   <h2>Id : {{id_ouvrier}}, Heures: {{Heures}}, Galerie:{{Galerie}},Machine:{{Machine}},Habiment:{{Habiment}}</h2>
+   <h2>Date:{{date}}</h2>
 
 
 `,
@@ -138,8 +144,12 @@ export class PointageComponent implements OnInit {
     myDate : Date;
     todayDate : String;
     pointageouvrier= new PointageOuvrier(0,0,new Date(),0,0,false,false)
-    animal: string;
-    name: string;
+    Habiment = false;
+    Machine = false;
+    date : String;
+    id_ouvrier : Number;
+    Heures : Number;
+    Galerie: Number;
   
   
 
@@ -152,7 +162,9 @@ export class PointageComponent implements OnInit {
       private router : Router,
       public dialog: MatDialog,
     ) { 
-      this.todayDate =this.datepipe.transform((new Date), 'MM/dd/yyyy');       }
+      this.todayDate =this.datepipe.transform((new Date), 'MM/dd/yyyy');
+      this.date = this.datepipe.transform((new Date), 'MM/dd/yyyy');
+           }
 
     updateDate(event: any)
     {
@@ -176,15 +188,21 @@ export class PointageComponent implements OnInit {
                 error => alert(error.message)
             );}
 
-    openDialog(): void {
+    updateId_ouvrier(id_ouvrier : Number){
+      this.id_ouvrier = id_ouvrier;
+    }
+
+    openDialog(id_ouvrier: String,nom : String): void {
       const dialogRef = this.dialog.open(PrimesComponent, {
-      width: '400px',
-      data: {name: this.name, animal: this.animal},
+      width: '200px',
+      data: {id: id_ouvrier,name: nom, Habiment: this.Habiment, Machine :this.Machine},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result);
+      [this.Habiment,this.Machine] = result;
+      console.log(this.Habiment);
+      console.log(this.Machine);
     });
   }
 

@@ -1,11 +1,10 @@
-<h1 mat-dialog-title>Quelle prime touche-t-il/elle?</h1>
+
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Primes</mat-label>
-    <input matInput>
-  </mat-form-field>
+  <section>
+    <p><mat-checkbox [(ngModel)] = "data.Habiment" >Habiment</mat-checkbox></p>
+    <p><mat-checkbox [(ngModel)] = "data.Machine" >Machine</mat-checkbox></p>	
+  </section>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button>
+<div mat-dialog-actions align="center">
+  <button mat-button  [mat-dialog-close]="[data.Habiment,data.Machine]" cdkFocusInitial>Valider</button>
 </div>
