@@ -138,6 +138,9 @@ export class PointageComponent implements OnInit {
     myDate : Date;
     todayDate : String;
     pointageouvrier= new PointageOuvrier(0,0,new Date(),0,0,false,false)
+    animal: string;
+    name: string;
+  
   
 
 
@@ -173,14 +176,17 @@ export class PointageComponent implements OnInit {
                 error => alert(error.message)
             );}
 
-    openDialog() {
-      // this.pointageApi.initializerFormGroup();
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "60%";
-      this.dialog.open(PrimesComponent,dialogConfig);
-    }
+    openDialog(): void {
+      const dialogRef = this.dialog.open(PrimesComponent, {
+      width: '400px',
+      data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
