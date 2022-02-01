@@ -7,6 +7,7 @@ from .base import Base
 
 
 class RegistrationUser(Entity, Base):
+    #stockage de l'ensemble des utilisateurs de l'application 
     __tablename__ = 'registrationuser'
     email = sqlalchemy.Column(sqlalchemy.String(150),unique=True)
     password1 = sqlalchemy.Column(sqlalchemy.String(150))

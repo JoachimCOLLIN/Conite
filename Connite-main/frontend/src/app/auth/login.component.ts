@@ -3,7 +3,7 @@ import {AuthApiService} from './auth-api.service';
 import {Router,NavigationExtras} from "@angular/router";
 import { User } from './auth.model';
 import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
-import { PassData } from './data';
+
 
 
 @Component({
@@ -50,7 +50,7 @@ export class LoginComponent {
     password: string;
     id:0;
     res1:User;
-    constructor(private authApi: AuthApiService, private router: Router, private data: PassData)
+    constructor(private authApi: AuthApiService, private router: Router)
     {}
     // updateEmail(event: any)
     // {
@@ -67,9 +67,7 @@ export class LoginComponent {
         this.authApi
             .login(email, password)
             .subscribe(
-                res =>{this.authApi.user = res;this.data.storage = {
-                    "user": this.authApi.user,
-                    }; 
+                res =>{this.authApi.user = res;
                 this.router.navigate(["/"])},
                 err => console.log(err),
 

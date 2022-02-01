@@ -27,7 +27,7 @@ import {AuthApiService} from './auth/auth-api.service';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
-import { PassData } from './auth/data';
+
 
 import { InformationsComponent } from './informationchantier/informations.component';
 import { ChantierComponent } from './chantiers/chantier.component';
@@ -102,7 +102,6 @@ const appRoutes: Routes = [
         InformationsApiService,
         PointageApiService,
         DatePipe,
-        PassData,
     ],
     bootstrap: [AppComponent]
 })

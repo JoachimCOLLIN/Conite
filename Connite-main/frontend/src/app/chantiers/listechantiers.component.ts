@@ -5,7 +5,6 @@ import {Chantier} from './chantier.model';
 import {ChantiersApiService} from './chantiers-api.service';
 import { AuthApiService } from '../auth/auth-api.service';
 import {ActivatedRoute} from "@angular/router";
-import { PassData } from '../auth/data';
 
 @Component({
   selector: 'chantiers',
@@ -40,10 +39,7 @@ export class ChantiersComponent implements OnInit, OnDestroy
     chantiersListSubs: Subscription;
     chantiersList: Chantier[];
 
-    constructor(private chantiersApi: ChantiersApiService, private authApi: AuthApiService,private data : PassData) {
-    this.authApi.user=this.data.storage;
-    console.log(this.authApi.user)
-    }
+    constructor(private chantiersApi: ChantiersApiService, private authApi: AuthApiService) {}
   
 
 

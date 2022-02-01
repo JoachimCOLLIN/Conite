@@ -6,7 +6,8 @@ from .base import Base
 
 
 class Chantier(Entity, Base):
-    #this class defines that instances of it must be persisted to and retrieved from a table called chantiers.
+    #cette classe chantier stocke les informations du chantier et dérive de entity pour avoir la tracabilité des changements 
+
     __tablename__ = 'chantiers'
     title = sqlalchemy.Column(sqlalchemy.String) 
     description = sqlalchemy.Column(sqlalchemy.String)
@@ -24,6 +25,7 @@ class Chantier(Entity, Base):
 
 
 class ChantierSchema(marshmallow.Schema): 
+    #Sérialisation et désérialisation des données 
     id = marshmallow.fields.Number()
     title = marshmallow.fields.Str()
     description = marshmallow.fields.Str()

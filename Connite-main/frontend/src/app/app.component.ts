@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from './env';
 import { AuthApiService } from './auth/auth-api.service';
-import { PassData } from './auth/data';
 import { User } from './auth/auth.model';
 
 
@@ -30,9 +29,7 @@ import { User } from './auth/auth.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient,private authApi: AuthApiService,private data : PassData) {
-    this.authApi.user=this.data.storage;
-    console.log(this.authApi.user)
+  constructor(private http: HttpClient,private authApi: AuthApiService) {
     }
   
   // private static _handleError(err: HttpErrorResponse | any)
@@ -52,10 +49,6 @@ export class AppComponent implements OnInit {
   }
   signout()
   {
-    this.authApi.user.isloggedIn=false
-    this.authApi.user.id=0
-    this.authApi.user.email=''
-    console.log(this.authApi.user)
   }
   ngOnInit()
   {

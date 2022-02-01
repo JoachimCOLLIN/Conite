@@ -10,15 +10,15 @@ blueprint = flask.Blueprint('chantiers', __name__)
 
 @blueprint.route('/chantiers')
 def get_chantiers():
-    # fetching from the database
+    # prend tous les chantiers de la base de données 
     session = get_session()
     chantier_objects = session.query(Chantier).all()
 
-    # transforming into JSON-serializable objects
+    # transformation en object sérialisable en json
     schema = ChantierSchema(many=True)
     chantiers = schema.dump(chantier_objects)
 
-    # serializing as JSON
+    # sérialisation et envoi des données
     session.close()
     return flask.jsonify(chantiers)
 
@@ -72,7 +72,8 @@ def delete_chantier(chantier_id):
     db = get_session()
     chantier = db.query(Chantier).filter_by(id=chantier_id).first()
     db.delete(chantier)
-    ouvriers = db.query(Ouvrier).filter(Ouvrier.id_chantier>=int(chantier_id)).filter(Ouvrier.id_chantier< int(chantier_id)+1).all()
+    #
+    ouvriers = db.query(Ouvrier).filter(Ouvrier.id_chantier==int(chantier_id)).all()
     for ouvrier in ouvriers:
         db.delete(ouvrier)
     db.commit()

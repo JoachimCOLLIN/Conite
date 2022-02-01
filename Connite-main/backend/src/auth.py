@@ -6,7 +6,6 @@ import werkzeug.security
 from .db import get_session
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .entities.registration_user import RegistrationUser,RegistrationUserSchema
-from .entities.login_user import LoginUser,LoginUserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
@@ -27,13 +26,6 @@ def login():
     return "err"
 
 
-
-
-@blueprint.route('/logout',methods=['GET','POST'])
-def logout():
-    requesting_user = flask.request.get_json()
-    requesting_user["isloggedIn"]=False
-    return flask.jsonify(requesting_user)
 
 
 

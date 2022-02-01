@@ -5,7 +5,6 @@ import {Ouvrier} from '../ouvriers/ouvrier.model';
 import {ChantiersApiService} from './chantiers-api.service';
 import { Chantier } from './chantier.model';
 import { AuthApiService } from '../auth/auth-api.service';
-import { PassData } from '../auth/data';
 @Component({
     selector: 'chantier',
     template: `
@@ -66,11 +65,8 @@ export class ChantierComponent implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private chantiersApi: ChantiersApiService,
-      private authApi: AuthApiService,
-      private data : PassData) {
-        
-        this.authApi.user=this.data.storage;
-        console.log(this.authApi.user);
+      private authApi: AuthApiService) {
+
         this.chantier = new Chantier("","","","","");
         this.id = 0;
     }
