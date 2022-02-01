@@ -1,0 +1,28 @@
+<h2>Veuillez rentrer la journée de {{data.name}}</h2>
+<section>
+    <h3>Temps de travail</h3>
+<div>
+    <a>Heures:</a>
+    <mat-form-field appearance="legacy" [style.width.px]=18 >
+        <mat-label></mat-label>
+        <input matInput [(ngModel)]="data.heures">
+      </mat-form-field>
+</div>
+<div>
+    <a>Galerie:</a>
+    <mat-form-field appearance="legacy" [style.width.px]=18 >
+        <mat-label></mat-label>
+        <input matInput [(ngModel)]="data.galerie">
+      </mat-form-field>
+</div>
+</section>
+<div mat-dialog-content>
+    <section>
+        <h3>Primes</h3>
+      <p><mat-checkbox [(ngModel)] = "data.habillement" >Habiment</mat-checkbox></p>
+      <p><mat-checkbox [(ngModel)] = "data.machine" >Machine</mat-checkbox></p>	
+    </section>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button  [mat-dialog-close]="[data.Habiment,data.Machine]" cdkFocusInitial>Valider</button>
+  </div>

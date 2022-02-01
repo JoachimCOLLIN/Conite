@@ -5,25 +5,29 @@ import { throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
 import {Auth,User} from './auth.model';
-import * as Auth0 from 'auth0-web';
+import { HttpHeaders } from '@angular/common/http';
+
 
 @Injectable()
 export class AuthApiService
 {   
-    user =new User('','',false)
+    user =new User('',0,false)
     auth= new Auth('','','','','')
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      };
     constructor(private http: HttpClient)
     {}
 
-    private static handleError(err: HttpErrorResponse | any)
-    {
-        return throwError(err.message || 'Error: Unable to complete request.');
-    }
+    // private static handleError(err: HttpErrorResponse | any)
+    // {
+    //     return throwError(err.message || 'Error: Unable to complete request.');
+    // }
 
-    login(auth: User): Observable<any>
-    {
+    login(email: string, password: string): Observable<any>
+    {   
         return this.http
-            .post(`${API_URL}/login`, auth);
+            .post<User>(`${API_URL}/login`,{"email":email,"password":password});
     }
 
     register(auth: Auth): Observable<any>

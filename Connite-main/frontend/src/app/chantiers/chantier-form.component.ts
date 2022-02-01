@@ -66,7 +66,7 @@ export class ChantierFormComponent {
     chantier : Chantier;
 
     constructor(private chantiersApi: ChantiersApiService, private router: Router)
-    { this.chantier = new Chantier("","","","","");}
+    {this.chantier = new Chantier("","","","","");}
 
     updateTitle(event: any)
     {
@@ -98,7 +98,7 @@ export class ChantierFormComponent {
         this.chantiersApi
             .saveChantier(this.chantier)
             .subscribe(
-                () => this.router.navigate(['/']),
+                () => this.router.navigate(['/chantier']),
                 error => alert(error.message)
             );
     }

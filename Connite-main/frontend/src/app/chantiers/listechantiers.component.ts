@@ -1,8 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
+import { API_URL } from '../env';
 import {Chantier} from './chantier.model';
 import {ChantiersApiService} from './chantiers-api.service';
-
+import { AuthApiService } from '../auth/auth-api.service';
+import {ActivatedRoute} from "@angular/router";
+import { PassData } from '../auth/data';
 
 @Component({
   selector: 'chantiers',
@@ -17,7 +20,7 @@ import {ChantiersApiService} from './chantiers-api.service';
           </button>
           <mat-card-title>{{chantier.title}}</mat-card-title>
           <mat-card-subtitle>{{chantier.description}}</mat-card-subtitle>
-          <button mat-raised-button color="accent" [routerLink] = "['chantier',chantier.id]" >Accès</button>
+          <button mat-raised-button color="accent" [routerLink] = "[chantier.id]"  >Accès</button>
           <button mat-button color="warn" (click)="delete(chantier.id)">Supprimer</button>
           </mat-card-content>
       </mat-card>
@@ -33,15 +36,22 @@ import {ChantiersApiService} from './chantiers-api.service';
 
 export class ChantiersComponent implements OnInit, OnDestroy
 {
+    
     chantiersListSubs: Subscription;
     chantiersList: Chantier[];
 
-    constructor(private chantiersApi: ChantiersApiService)
-    {}
+    constructor(private chantiersApi: ChantiersApiService, private authApi: AuthApiService,private data : PassData) {
+    this.authApi.user=this.data.storage;
+    console.log(this.authApi.user)
+    }
+  
+
 
 
     ngOnInit()
-    {
+    { 
+
+        
         this.chantiersListSubs = this.chantiersApi
             .getChantiers()
             .subscribe(res => {this.chantiersList = res;}, console.error);

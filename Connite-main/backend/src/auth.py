@@ -13,23 +13,23 @@ from . import db
 blueprint = flask.Blueprint('auth', __name__)
 
 
-@blueprint.route('/login', methods=['GET', 'POST'])
+@blueprint.route('/login', methods=[ 'POST'])
 def login():
-    print(1)
-    if request.method == 'POST':
-        requesting_user = flask.request.get_json()
-        print(requesting_user)
-        session = get_session()
-        user = session.query(RegistrationUser).filter_by(email=requesting_user["email"]).first()
-        print(user)
-        requesting_user["isloggedIn"]=True
-        print(requesting_user)
-        return flask.jsonify(requesting_user),201
+    requesting_user = flask.request.get_json()
+    print
+    session = get_session()
+    user = session.query(RegistrationUser).filter_by(email=requesting_user["email"]).first()
+    if user.password1==requesting_user["password"]:
+        new_user = {'id': user.id, 'isloggedIn': True, 'email': user.email}
+        session.close()
+        print(new_user)
+        return flask.jsonify(new_user)
+    return "err"
+
 
 
 
 @blueprint.route('/logout',methods=['GET','POST'])
-#@login_required
 def logout():
     requesting_user = flask.request.get_json()
     requesting_user["isloggedIn"]=False
@@ -37,27 +37,26 @@ def logout():
 
 
 
-@blueprint.route('/register', methods=['GET', 'POST'])
+@blueprint.route('/register', methods=['POST'])
 def sign_up():
-    if flask.request.method == 'POST':
-        requesting_user = RegistrationUserSchema(only=('email', 'first_name','family_name','password1','password2')).load(flask.request.get_json())
-        if requesting_user["password1"]!=requesting_user["password2"]:
-            print("wrong password")
-        else:
-            session = get_session()
-            user = session.query(RegistrationUser).filter_by(email=requesting_user["email"]).first()
-            print(user)
-            if user:
-                print("already exist")
-                session.close()
+    requesting_user = RegistrationUserSchema(only=('email', 'first_name','family_name','password1','password2')).load(flask.request.get_json())
+    if requesting_user["password1"]!=requesting_user["password2"]:
+        print("wrong password")
+    else:
+        session = get_session()
+        user = session.query(RegistrationUser).filter_by(email=requesting_user["email"]).first()
+        print(user)
+        if user:
+            print("already exist")
+            session.close()
 
-            else:
-                print("ok")
-                registration_user = RegistrationUser(**requesting_user,created_by='HTTP request')
-                session.add(registration_user)
-                session.commit()
-                new_user = RegistrationUserSchema().dump(registration_user)
-                session.close()
-                return flask.jsonify(new_user),201
+        else:
+            print("ok")
+            registration_user = RegistrationUser(**requesting_user,created_by='HTTP post request')
+            session.add(registration_user)
+            session.commit()
+            new_user = RegistrationUserSchema().dump(registration_user)
+            session.close()
+            return flask.jsonify(new_user),201
 
     return 'er'

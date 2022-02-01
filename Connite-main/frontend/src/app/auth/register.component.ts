@@ -94,8 +94,9 @@ export class RegisterComponent {
         this.authApi
             .register(this.authApi.auth)
             .subscribe(
-                () => this.router.navigate(['/login']),
+                () => this.router.navigate(['/']),
                 error => alert(error.message)
             );
+        
     }
 }

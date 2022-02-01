@@ -11,7 +11,7 @@ import { PointageApiService } from './pointage-api.serivce';
 import { MatDialog, MatDialogConfig, MatDialogModule, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import { PrimesComponent } from '../primes/primes.component';
 import * as internal from 'events';
-
+import { UpdateOuvrierComponent } from '../update-ouvrier/update-ouvrier.component';
 
 
 @Component({
@@ -84,7 +84,7 @@ import * as internal from 'events';
     <ng-container matColumnDef="bouton">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Valider </th>
       <td mat-cell *matCellDef="let element" >
-        <button mat-mini-fab color="primary" (click) = "updateId_ouvrier(element.id)"><mat-icon>check</mat-icon></button>
+        <button mat-mini-fab color="primary" (click) = "openUpdateOuvrier(element.id, element.nom)" (click) = "updateId_ouvrier(element.id)"><mat-icon>edit</mat-icon></button>
       </td>
     </ng-container>
 
@@ -150,6 +150,7 @@ export class PointageComponent implements OnInit {
     id_ouvrier : Number;
     Heures : Number;
     Galerie: Number;
+    pointage : PointageOuvrier;
   
   
 
@@ -166,18 +167,7 @@ export class PointageComponent implements OnInit {
       this.date = this.datepipe.transform((new Date), 'MM/dd/yyyy');
            }
 
-    updateDate(event: any)
-    {
-        this.pointageouvrier.date=event.target.value
-    }
-    updateHeures(event: any)
-    {
-        this.pointageouvrier.heures=event.target.value
-    }
-    updateGaleriesHeures(event: any)
-    {
-        this.pointageouvrier.galerie_heures=event.target.value
-    }
+    
 
     updatePointage(pointageouvrier : PointageOuvrier)
     {   
@@ -205,6 +195,19 @@ export class PointageComponent implements OnInit {
       console.log(this.Machine);
     });
   }
+
+    openUpdateOuvrier(id_ouvrier: Number,nom: String){
+      const dialogRef = this.dialog.open(UpdateOuvrierComponent,{
+        width:'600px',
+        data:{pointage: this.pointage,IdOuvrier:id_ouvrier,name:nom,IdChantier:this.id}});
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.pointage = result;
+        console.log(result);
+      })
+    }
+
+
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {

@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 
+
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
@@ -26,6 +27,7 @@ import {AuthApiService} from './auth/auth-api.service';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
+import { PassData } from './auth/data';
 
 import { InformationsComponent } from './informationchantier/informations.component';
 import { ChantierComponent } from './chantiers/chantier.component';
@@ -37,16 +39,18 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PrimesComponent } from './primes/primes.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { UpdateOuvrierComponent } from './update-ouvrier/update-ouvrier.component';
+import { User } from './auth/auth.model';
 
 
 const appRoutes: Routes = [
-    {path: '', component: ChantiersComponent},
+    {path: 'chantier', component: ChantiersComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'login', component: LoginComponent},
+    {path: '', component: LoginComponent},
     {path: 'new-chantier', component: ChantierFormComponent},
     {path: 'about', component: AboutComponent},
     {path: 'callback', component: CallbackComponent },
-    {path: 'infos/:id', component: InformationsComponent},
+    {path: 'chantier/infos/:id', component: InformationsComponent},
     {path: 'chantier/:id',component : ChantierComponent},
     {path: 'listedesouvriers/:id', component: ListeOuvrierComponent},
     {path: 'new-ouvrier/:id', component : OuvrierFormComponent},
@@ -69,6 +73,7 @@ const appRoutes: Routes = [
       OuvrierFormComponent,
       PointageComponent,
       PrimesComponent,
+      UpdateOuvrierComponent,
       
   ],
   imports: [
@@ -97,6 +102,7 @@ const appRoutes: Routes = [
         InformationsApiService,
         PointageApiService,
         DatePipe,
+        PassData,
     ],
     bootstrap: [AppComponent]
 })

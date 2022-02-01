@@ -4,7 +4,8 @@ import {Subscription} from 'rxjs';
 import {Ouvrier} from '../ouvriers/ouvrier.model';
 import {ChantiersApiService} from './chantiers-api.service';
 import { Chantier } from './chantier.model';
-
+import { AuthApiService } from '../auth/auth-api.service';
+import { PassData } from '../auth/data';
 @Component({
     selector: 'chantier',
     template: `
@@ -65,7 +66,11 @@ export class ChantierComponent implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private chantiersApi: ChantiersApiService,
-    ) {
+      private authApi: AuthApiService,
+      private data : PassData) {
+        
+        this.authApi.user=this.data.storage;
+        console.log(this.authApi.user);
         this.chantier = new Chantier("","","","","");
         this.id = 0;
     }
@@ -73,6 +78,7 @@ export class ChantierComponent implements OnInit {
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
         this.id = +this.route.snapshot.paramMap.get('id')});
+
 
       this.chantiersListSubs = this.chantiersApi
           .getChantier(this.id)

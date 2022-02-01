@@ -9,6 +9,7 @@ import {Chantier} from '../chantiers/chantier.model';
 
 <mat-card>
 <h2>Mon Chantier</h2>
+
   <mat-form-field class="full-width">
     <input matInput
            placeholder="Titre : {{chantier.title}} " 
@@ -104,7 +105,7 @@ export class InformationsComponent implements OnInit {
         this.infosApi
             .updateChantier(this.chantier)
             .subscribe(
-                () => this.router.navigate(['/']),
+                () => this.router.navigate(['/chantier']),
                 error => alert(error.message)
             );
       
