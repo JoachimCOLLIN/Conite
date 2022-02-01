@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { throwError } from 'rxjs';
-import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
+<<<<<<< Updated upstream
 import {Auth} from './auth.model';
 
 @Injectable()
@@ -19,6 +18,21 @@ export class AuthApiService
 
     login(auth: Auth): Observable<any>
     {
+=======
+import {Auth,User} from './auth.model';
+
+
+@Injectable()
+export class AuthApiService
+{   
+    user =new User('',0,false)
+    auth= new Auth('','','','','')
+    constructor(private http: HttpClient)
+    {}
+
+    login(email: string, password: string): Observable<any>
+    {   
+>>>>>>> Stashed changes
         return this.http
             .post(`${API_URL}/login`, auth)
             .pipe(catchError(AuthApiService.handleError));

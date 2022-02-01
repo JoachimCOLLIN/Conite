@@ -19,9 +19,24 @@ import {AuthApiService} from './auth/auth-api.service';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
+<<<<<<< Updated upstream
 import * as Auth0 from 'auth0-web';
 import { InformationsComponent } from './exams/informations.component';
 
+=======
+
+import { InformationsComponent } from './informationchantier/informations.component';
+import { ChantierComponent } from './chantiers/chantier.component';
+import {ListeOuvrierComponent} from './ouvriers/listeouvrier.component';
+import { OuvrierFormComponent } from './ouvriers/ouvrier-form.component';
+import { PointageApiService } from './pointage/pointage-api.serivce';
+import { PointageComponent } from './pointage/pointage.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { PrimesComponent } from './primes/primes.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { UpdateOuvrierComponent } from './update-ouvrier/update-ouvrier.component';
+>>>>>>> Stashed changes
 
 const appRoutes: Routes = [
     {path: '', component: ExamsComponent},
@@ -57,8 +72,17 @@ const appRoutes: Routes = [
       MatIconModule,
   ],
     providers: [
+<<<<<<< Updated upstream
         ExamsApiService,
         AuthApiService
+=======
+        ChantiersApiService,
+        AuthApiService,
+        OuvriersApiService,
+        InformationsApiService,
+        PointageApiService,
+        DatePipe,
+>>>>>>> Stashed changes
     ],
     bootstrap: [AppComponent]
 })

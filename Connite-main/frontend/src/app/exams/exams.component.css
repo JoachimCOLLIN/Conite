@@ -26,4 +26,15 @@ button.material-icons{
   position : absolute;
   right : 3px;
   top : 3px;
+<<<<<<< Updated upstream:Connite-main/frontend/src/app/exams/exams.component.css
+=======
+}
+
+.meschantiers{
+  font-weight : bold;
+}
+
+.attention{
+  margin-bottom : 0px;
+>>>>>>> Stashed changes:Connite-main/frontend/src/app/chantiers/chantiers.component.css
 }
