@@ -1,25 +1,25 @@
 <h2>Veuillez rentrer la journée de cet ouvrier</h2>
 <section>
-    <h3>Temps de travail</h3>
+<h3>Temps de travail</h3>
 <div>
     <a>Heures:</a>
     <mat-form-field appearance="legacy" [style.width.px]=18 >
         <mat-label></mat-label>
         <input matInput [(ngModel)]="data.pointage.heures">
-      </mat-form-field>
+    </mat-form-field>
 </div>
 <div>
     <a>Galerie:</a>
     <mat-form-field appearance="legacy" [style.width.px]=18 >
         <mat-label></mat-label>
         <input matInput [(ngModel)]="data.pointage.galerie">
-      </mat-form-field>
+    </mat-form-field>
 </div>
 </section>
 <div mat-dialog-content>
     <section>
         <h3>Primes</h3>
-      <p><mat-checkbox [(ngModel)] = "data.pointage.habillement" >Habiment</mat-checkbox></p>
+      <p><mat-checkbox [(ngModel)] = "data.pointage.habillement" >Habillement</mat-checkbox></p>
       <p><mat-checkbox [(ngModel)] = "data.pointage.machine" >Machine</mat-checkbox></p>	
 </section>
 <section>

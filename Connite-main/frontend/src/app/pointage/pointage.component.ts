@@ -81,7 +81,7 @@ import { UpdateOuvrierComponent } from '../update-ouvrier/update-ouvrier.compone
     <ng-container matColumnDef="bouton">
       <th mat-header-cell  *matHeaderCellDef style="text-align:center"> Valider </th>
       <td mat-cell *matCellDef="let element" >
-        <button mat-mini-fab color="primary" (click) = "openUpdateOuvrier(element.id, element.nom)" (click) = "updateId_ouvrier(element.id)"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab color="primary" (click) = "openUpdateOuvrier(element.id)"><mat-icon>edit</mat-icon></button>
       </td>
     </ng-container>
 
@@ -89,7 +89,7 @@ import { UpdateOuvrierComponent } from '../update-ouvrier/update-ouvrier.compone
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
    </table>
 
-   <h2>Id : {{id_ouvrier}}, Heures: {{Heures}}, Galerie:{{Galerie}},Machine:{{Machine}},Habiment:{{Habiment}}</h2>
+   <h2>Id Ouvrier :  {{pointage.id_ouvrier}},Id Chantier: {{pointage.id_chantier}}, Heures: {{pointage.heures}}, Galerie:{{pointage.galerie}},Machine:{{pointage.machine}},Habiment:{{pointage.habillement}}</h2>
    <h2>Date:{{date}}</h2>
 
 
@@ -140,14 +140,8 @@ export class PointageComponent implements OnInit {
     displayedColumns: string[] = ['nom', 'prenom', 'age','qualification','heures','Galerie','primes','date', 'bouton'];
     myDate : Date;
     todayDate : String;
-    pointageouvrier= new PointageOuvrier(0,0,new Date(),0,0,false,false)
-    Habiment = false;
-    Machine = false;
-    date : String;
-    id_ouvrier : Number;
-    Heures : Number;
-    Galerie: Number;
-    pointage : PointageOuvrier;
+    pointage= new PointageOuvrier(0,0,new Date(),0,0,false,false)
+
   
   
 
@@ -161,46 +155,29 @@ export class PointageComponent implements OnInit {
       public dialog: MatDialog,
     ) { 
       this.todayDate =this.datepipe.transform((new Date), 'MM/dd/yyyy');
-      this.date = this.datepipe.transform((new Date), 'MM/dd/yyyy');
            }
 
-    
-
-    updatePointage(pointageouvrier : PointageOuvrier)
-    {   
-        this.pointageApi
-            .updatePointage(this.pointageouvrier)
-            .subscribe(
-                () => this.router.navigate([]),
-                error => alert(error.message)
-            );}
-
-    updateId_ouvrier(id_ouvrier : Number){
-      this.id_ouvrier = id_ouvrier;
-    }
 
     openDialog(id_ouvrier: String,nom : String): void {
       const dialogRef = this.dialog.open(PrimesComponent, {
       width: '200px',
-      data: {id: id_ouvrier,name: nom, Habiment: this.Habiment, Machine :this.Machine},
+      data: {id: id_ouvrier,name: nom},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      [this.Habiment,this.Machine] = result;
-      console.log(this.Habiment);
-      console.log(this.Machine);
     });
   }
 
-    openUpdateOuvrier(id_ouvrier: Number,nom: String){
+    openUpdateOuvrier(id_ouvrier: Number){
       const dialogRef = this.dialog.open(UpdateOuvrierComponent,{
         width:'600px',
-        data:{pointage: this.pointage,IdOuvrier:id_ouvrier,name:nom,IdChantier:this.id}});
+        data:{pointage: this.pointage}});
 
       dialogRef.afterClosed().subscribe(result => {
-        this.pointage = result;
-        console.log(result);
+
+        [this.pointage.heures,this.pointage.machine,this.pointage.habillement,this.pointage.date,this.pointage.galerie] = result;
+        this.pointage.id_chantier = this.id;
+        this.pointage.id_ouvrier = id_ouvrier;
       })
     }
 

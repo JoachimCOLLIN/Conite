@@ -1,8 +1,8 @@
 export class PointageOuvrier
 {
     constructor(
-        public id_chantier: number,
-        public id_ouvrier:number,
+        public id_chantier: Number,
+        public id_ouvrier:Number,
         public date: Date,
         public heures: number,
         public galerie: number,
