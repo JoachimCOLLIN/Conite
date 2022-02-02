@@ -5,30 +5,29 @@ import { User } from './auth.model';
 import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 
 
-
 @Component({
     selector: 'login-form',
     template: `
-<mat-card>
-<h2>Connexion</h2>
-<mat-form-field class="full-width">
-<input matInput
-placeholder="Adresse Email"
-[(ngModel)]="email">
-</mat-form-field>
+    <mat-card>
+        <h2>Connexion</h2>
+        <mat-form-field class="full-width">
+            <input matInput
+            placeholder="Adresse Email"
+            [(ngModel)]="email">
+        </mat-form-field>
 
-<mat-form-field class="full-width">
-<input type="password" matInput
-placeholder="Mot de passe"
-[(ngModel)] = "password">
-</mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="password" matInput
+            placeholder="Mot de passe"
+            [(ngModel)] = "password">
+        </mat-form-field>
 
-<button mat-raised-button
-color="primary"
-(click)="login(email, password)">
-Se connecter
-</button>
-</mat-card>
+        <button mat-raised-button
+            color="primary"
+            (click)="login(email, password)">
+            Se connecter
+        </button>
+    </mat-card>
 `,
     styles: [`
 .login-form {
@@ -52,14 +51,6 @@ export class LoginComponent {
     res1:User;
     constructor(private authApi: AuthApiService, private router: Router)
     {}
-    // updateEmail(event: any)
-    // {
-    //     this.authApi.user.email = event.target.value;
-    // }
-    // updatePassword(event: any)
-    // {
-    //     this.authApi.user.password = event.target.value;
-    // }
 
     login(email: string, password: string)
     {   
@@ -68,11 +59,10 @@ export class LoginComponent {
             .login(email, password)
             .subscribe(
                 res =>{this.authApi.user = res;
-                this.router.navigate(["/"])},
+                this.router.navigate(["/chantier"]);
+                localStorage.setItem('id', res.id);
+            },
                 err => console.log(err),
-
-
-
             );
             
 

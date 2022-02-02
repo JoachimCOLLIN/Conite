@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Inject } from '@angular/core';  
-import { FormsModule } from '@angular/forms';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatCardModule} from '@angular/material/card';
 
 
 

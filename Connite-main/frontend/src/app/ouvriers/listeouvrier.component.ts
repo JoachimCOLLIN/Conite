@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {Subscription} from 'rxjs';
 import { Ouvrier } from './ouvrier.model';
 import { OuvriersApiService } from './ouvriers-api.service';
-import { AuthApiService } from '../auth/auth-api.service';
 
 
 @Component({
@@ -86,7 +85,6 @@ export class ListeOuvrierComponent implements OnInit {
 
 
     constructor(
-      private authApi: AuthApiService,
       private route: ActivatedRoute,
       private ouvriersApi: OuvriersApiService,
     ) {}
@@ -100,7 +98,6 @@ export class ListeOuvrierComponent implements OnInit {
                     res => {this.ouvrier = res;}, console.error)}, console.error); 
                   }
 
-
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
         this.id = +this.route.snapshot.paramMap.get('id');
@@ -111,10 +108,7 @@ export class ListeOuvrierComponent implements OnInit {
       const self = this; 
 
       });
-
       };
-
-
     }
 
         

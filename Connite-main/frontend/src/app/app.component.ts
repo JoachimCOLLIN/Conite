@@ -5,6 +5,7 @@ import {catchError} from 'rxjs/operators';
 import {API_URL} from './env';
 import { AuthApiService } from './auth/auth-api.service';
 import { User } from './auth/auth.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,32 +29,23 @@ import { User } from './auth/auth.model';
   `,
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  constructor(private http: HttpClient,private authApi: AuthApiService) {
+export class AppComponent  {
+  constructor(private http: HttpClient, private router: Router) {
     }
   
-  // private static _handleError(err: HttpErrorResponse | any)
-  // {
-  //     return Observable.throw(err.message || 'Error: Unable to complete request.');
-  // }
-
 
   title = "frontend";
-
+  auth = false;
 
   about()
   {
       return this.http
           .get(`${API_URL}/about`)
-          // .pipe(catchError(AppComponent._handleError));
   }
   signout()
   {
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
-  ngOnInit()
-  {
-    this.authApi.user =new User('',0,false);
-    console.log(this.authApi.user)
-    const self = this;
-  }
+
 }

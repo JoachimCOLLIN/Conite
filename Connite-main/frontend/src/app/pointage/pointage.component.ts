@@ -1,16 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Subscription} from 'rxjs';
 import { Ouvrier } from '../ouvriers/ouvrier.model';
 import { OuvriersApiService } from '../ouvriers/ouvriers-api.service';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { PointageOuvrier } from './pointage.model';
 import { PointageApiService } from './pointage-api.serivce';
 import { MatDialog, MatDialogConfig, MatDialogModule, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import { PrimesComponent } from '../primes/primes.component';
-import * as internal from 'events';
 import { UpdateOuvrierComponent } from '../update-ouvrier/update-ouvrier.component';
 
 

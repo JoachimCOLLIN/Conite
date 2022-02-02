@@ -8,6 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Ouvrier } from './ouvriers/ouvrier.model';
 
 
 
@@ -29,6 +30,8 @@ import {RegisterComponent} from './auth/register.component';
 import {CallbackComponent} from './callback.component';
 
 
+
+
 import { InformationsComponent } from './informationchantier/informations.component';
 import { ChantierComponent } from './chantiers/chantier.component';
 import {ListeOuvrierComponent} from './ouvriers/listeouvrier.component';
@@ -40,7 +43,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PrimesComponent } from './primes/primes.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UpdateOuvrierComponent } from './update-ouvrier/update-ouvrier.component';
-import { User } from './auth/auth.model';
+
 
 
 const appRoutes: Routes = [
@@ -73,8 +76,7 @@ const appRoutes: Routes = [
       OuvrierFormComponent,
       PointageComponent,
       PrimesComponent,
-      UpdateOuvrierComponent,
-      
+      UpdateOuvrierComponent,      
   ],
   imports: [
       BrowserModule,

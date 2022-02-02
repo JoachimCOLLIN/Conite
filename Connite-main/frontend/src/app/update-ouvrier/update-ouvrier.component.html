@@ -1,28 +1,36 @@
-<h2>Veuillez rentrer la journée de {{data.name}}</h2>
+<h2>Veuillez rentrer la journée de cet ouvrier</h2>
 <section>
     <h3>Temps de travail</h3>
 <div>
     <a>Heures:</a>
     <mat-form-field appearance="legacy" [style.width.px]=18 >
         <mat-label></mat-label>
-        <input matInput [(ngModel)]="data.heures">
+        <input matInput [(ngModel)]="data.pointage.heures">
       </mat-form-field>
 </div>
 <div>
     <a>Galerie:</a>
     <mat-form-field appearance="legacy" [style.width.px]=18 >
         <mat-label></mat-label>
-        <input matInput [(ngModel)]="data.galerie">
+        <input matInput [(ngModel)]="data.pointage.galerie">
       </mat-form-field>
 </div>
 </section>
 <div mat-dialog-content>
     <section>
         <h3>Primes</h3>
-      <p><mat-checkbox [(ngModel)] = "data.habillement" >Habiment</mat-checkbox></p>
-      <p><mat-checkbox [(ngModel)] = "data.machine" >Machine</mat-checkbox></p>	
+      <p><mat-checkbox [(ngModel)] = "data.pointage.habillement" >Habiment</mat-checkbox></p>
+      <p><mat-checkbox [(ngModel)] = "data.pointage.machine" >Machine</mat-checkbox></p>	
+</section>
+<section>
+    <mat-form-field [style.width.px]=100 floatlabel = "always" >
+        <mat-label>{{todayDate}}</mat-label>
+        <input matInput [matDatepicker] = "myDatePicker" (keyup)="updateDate($event)" [(ngModel)]="data.pointage.date">
+        <mat-datepicker-toggle [for] = "myDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #myDatePicker ></mat-datepicker>
+      </mat-form-field>
     </section>
-  </div>
-  <div mat-dialog-actions align="center">
-    <button mat-button  [mat-dialog-close]="[data.Habiment,data.Machine]" cdkFocusInitial>Valider</button>
+
+  <div mat-dialog-actions >>
+    <button mat-button  [mat-dialog-close]="[data.pointage.heures,data.pointage.machine,data.pointage.habillement,data.pointage.date,data.pointage.galerie]" cdkFocusInitial>Valider</button>
   </div>

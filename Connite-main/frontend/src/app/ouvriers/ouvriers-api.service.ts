@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {catchError} from 'rxjs/operators';
 import {API_URL} from '../env';
 import {Ouvrier} from './ouvrier.model';
-import { Chantier } from '../chantiers/chantier.model';
 
 
 @Injectable()
@@ -13,16 +11,11 @@ export class OuvriersApiService
     constructor(private http: HttpClient)
     {}
 
-    // private static handleError(err: HttpErrorResponse | any)
-    // {
-    //     return Observable.throw(err.message || 'Error: Unable to complete request.');
-    // }
 
     getOuvriers(chantierId: number)
     {
         return this.http
             .get<Ouvrier[]>(`${API_URL}/ouvriers_chantier/${chantierId}`)
-            // .pipe(catchError(OuvriersApiService.handleError));
     }
 
     saveOuvrier(ouvrier: Ouvrier): Observable<any> {
