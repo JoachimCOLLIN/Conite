@@ -1,4 +1,4 @@
-# Conite-LE-VRAI
+# Conite
 Conite was a school project I completed during the first semester of my second year at École des Ponts ParisTech. 
 The course, TDLog, included web development and coding best practices. It ended with a two-month project where students had to create an application or a website.
 
